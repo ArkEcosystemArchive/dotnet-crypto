@@ -1,15 +1,6 @@
-using NBitcoin.Crypto;
 using NBitcoin.DataEncoders;
-using NBitcoin;
-using SshNet.Security.Cryptography;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Security.Cryptography;
-using System.Text;
 using System;
-using Validation;
 using System.IO;
-using Newtonsoft.Json.Linq;
 
 namespace ArkEcosystem.Crypto
 {
