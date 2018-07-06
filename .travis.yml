@@ -2,4 +2,6 @@ language: csharp
 solution: ./ArkEcosystem.Crypto/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.sln
 
 install:
-  - nuget restore ./ArkEcosystem.Crypto/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.sln
+  - nuget
+  - nuget restore ./ArkEcosystem.Crypto/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.sln -Verbosity detailed
+  - nuget update ./ArkEcosystem.Crypto/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.sln -Verbosity detailed
