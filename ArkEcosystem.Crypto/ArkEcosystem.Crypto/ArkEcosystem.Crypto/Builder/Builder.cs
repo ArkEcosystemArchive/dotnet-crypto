@@ -6,11 +6,11 @@ namespace ArkEcosystem.Crypto.Builder
         {
             transaction.Timestamp = Slot.GetTime();
 
-            transaction.Sign(secret);
+            transaction.Signature = transaction.Sign(secret);
 
             if (secondSecret != null)
             {
-                transaction.SecondSign(secondSecret);
+                transaction.SignSignature = transaction.SecondSign(secondSecret);
             }
 
             transaction.Id = transaction.GetId();

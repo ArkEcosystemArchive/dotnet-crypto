@@ -4,7 +4,7 @@ namespace ArkEcosystem.Crypto.Builder
 {
     public class DelegateRegistration
     {
-        public TransactionModel Create(string username, string secret, string secondSecret = null)
+        public static TransactionModel Create(string username, string secret, string secondSecret = null)
         {
             var transaction = new TransactionModel
             {

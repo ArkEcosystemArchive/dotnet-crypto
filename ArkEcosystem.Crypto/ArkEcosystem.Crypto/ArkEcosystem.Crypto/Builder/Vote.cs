@@ -4,7 +4,7 @@ namespace ArkEcosystem.Crypto.Builder
 {
     public class Vote
     {
-        public TransactionModel Create(List<string> votes, string secret, string secondSecret = null)
+        public static TransactionModel Create(List<string> votes, string secret, string secondSecret = null)
         {
             var transaction = new TransactionModel
             {
