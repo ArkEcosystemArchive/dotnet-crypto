@@ -1,9 +1,9 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crypto", "ArkEcosystem.Crypto\ArkEcosystem.Crypto\Crypto.csproj", "{0C37DC9F-7BBD-4DE6-B25D-FE3BEA0E37E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArkEcosystem.Crypto", "ArkEcosystem.Crypto\ArkEcosystem.Crypto\ArkEcosystem.Crypto.csproj", "{0C37DC9F-7BBD-4DE6-B25D-FE3BEA0E37E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "ArkEcosystem.Crypto.Tests\ArkEcosystem.Crypto.Tests\Tests.csproj", "{85ADE89A-DCDF-41DE-BBE0-360E08D717C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArkEcosystem.Crypto.Tests", "ArkEcosystem.Crypto.Tests\ArkEcosystem.Crypto.Tests\ArkEcosystem.Crypto.Tests.csproj", "{85ADE89A-DCDF-41DE-BBE0-360E08D717C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
