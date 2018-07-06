@@ -5,20 +5,13 @@ namespace ArkEcosystem.Crypto.Tests.Identity
     [TestClass]
     public class PrivateKeyTest
     {
+        [Ignore]
         [TestMethod]
-        public void Should_Be_True()
+        public void Should_Get_The_Address_From_Public_Key()
         {
-            Assert.IsTrue(true);
+            var actual = Crypto.Identity.PrivateKey.FromSecret("this is a top secret passphrase");
+
+            Assert.AreEqual("d8839c2432bfd0a67ef10a804ba991eabba19f154a3d707917681d45822a5712", actual);
         }
-
-        // /** @test */
-        // public function it_should_get_the_private_key_from_secret()
-        // {
-        //     $actual = TestClass::fromSecret('this is a top secret passphrase', Devnet::new());
-
-        //     $this->assertInstanceOf(EcPublicKey::class, $actual);
-        //     $this->assertInternalType('string', actual.getHex());
-        //     $this->assertSame('d8839c2432bfd0a67ef10a804ba991eabba19f154a3d707917681d45822a5712', actual.getHex());
-        // }
     }
 }

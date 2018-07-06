@@ -40,9 +40,18 @@ namespace ArkEcosystem.Crypto.Identity
             return FromPublicKey(privateKey.PubKey, publicKeyHash);
         }
 
-        public static bool Validate(string address)
+        public static bool Validate(string address, byte publicKeyHash = 0)
         {
-            return Encoders.Base58Check.DecodeData(address)[0] == Configuration.Network.Get().GetPublicKeyHash();
+            var addressPrefix = Encoders.Base58Check.DecodeData(address)[0];
+
+            if (publicKeyHash != 0)
+            {
+                return addressPrefix == publicKeyHash;
+            }
+            else
+            {
+                return addressPrefix == Configuration.Network.Get().GetPublicKeyHash();
+            }
         }
     }
 }
