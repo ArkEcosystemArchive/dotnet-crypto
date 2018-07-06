@@ -15,16 +15,17 @@ namespace ArkEcosystem.Crypto.Deserialisers
         {
             stream.Position = assetOffset / 2;
 
-            transaction.Asset.Add("min", reader.ReadByte() & 0xff);
+            transaction.Asset.Add("multisignature", new Dictionary<string, dynamic>());
+            transaction.Asset["multisignature"].Add("min", reader.ReadByte() & 0xff);
             var count = reader.ReadByte() & 0xff;
-            transaction.Asset.Add("lifetime", reader.ReadByte() & 0xff);
+            transaction.Asset["multisignature"].Add("lifetime", reader.ReadByte() & 0xff);
 
-            transaction.Asset.Add("keysgroup", new List<string>());
+            transaction.Asset["multisignature"].Add("keysgroup", new List<string>());
             for (int i = 0; i < count; i++)
             {
                 var key = serialised.Substring(assetOffset + 6 + i * 66, 66);
 
-                transaction.Asset["keysgroup"].Add(key);
+                transaction.Asset["multisignature"]["keysgroup"].Add(key);
             }
 
             return transaction.ParseSignatures(serialised, assetOffset + 6 + count * 66);

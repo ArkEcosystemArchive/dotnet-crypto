@@ -119,9 +119,9 @@ namespace ArkEcosystem.Crypto
                 // var publicKey = Identity.PublicKey.FromString(transaction.senderPublicKey);
                 // transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
 
-                for (int i = 0; i < transaction.Asset["keysgroup"].Count; i++)
+                for (int i = 0; i < transaction.Asset["multisignature"]["keysgroup"].Count; i++)
                 {
-                    transaction.Asset["keysgroup"][i] = "+" + transaction.Asset["keysgroup"][i];
+                    transaction.Asset["multisignature"]["keysgroup"][i] = "+" + transaction.Asset["multisignature"]["keysgroup"][i];
                 }
             }
 
