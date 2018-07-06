@@ -1,1 +1,2 @@
 language: csharp
+solution: ./ArkEcosystem.Crypto/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.sln
