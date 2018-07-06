@@ -1,2 +1,5 @@
 language: csharp
 solution: ./ArkEcosystem.Crypto/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.sln
+
+install:
+  - nuget restore ./ArkEcosystem.Crypto/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.sln
