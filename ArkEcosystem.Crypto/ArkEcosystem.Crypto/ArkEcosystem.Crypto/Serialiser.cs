@@ -17,13 +17,13 @@ namespace ArkEcosystem.Crypto
             writer = new BinaryWriter(stream);
         }
 
-        public string Serialise()
+        public byte[] Serialise()
         {
             HandleHeader();
             HandleTypeSpecific();
             HandleSignatures();
 
-            return Encoders.Hex.EncodeData(stream.ToArray());
+            return stream.ToArray();
         }
 
         public void HandleHeader()

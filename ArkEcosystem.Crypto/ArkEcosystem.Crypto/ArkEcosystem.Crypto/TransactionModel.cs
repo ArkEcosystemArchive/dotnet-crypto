@@ -2,6 +2,8 @@ using NBitcoin;
 using NBitcoin.DataEncoders;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace ArkEcosystem.Crypto
 {
@@ -37,8 +39,75 @@ namespace ArkEcosystem.Crypto
 
         public byte[] ToBytes(bool skipSignature = true, bool skipSecondSignature = true)
         {
-            // TODO: implement according to https://github.com/ArkEcosystem/php-crypto/blob/master/src/Crypto.php#L54
-            return new byte[512];
+            MemoryStream stream = new MemoryStream();
+
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write(Type);
+                writer.Write(Timestamp);
+                writer.Write(Encoders.Hex.DecodeData(SenderPublicKey));
+
+                if (RecipientId != null)
+                {
+                    writer.Write(Encoders.Base58Check.DecodeData(RecipientId));
+                }
+                else
+                {
+                    writer.Write(new byte[21]);
+                }
+
+                if (VendorField != null)
+                {
+                    var vendorFieldBytes = Encoding.ASCII.GetBytes(VendorField);
+
+                    if (vendorFieldBytes.Length < 65)
+                    {
+                        writer.Write(vendorFieldBytes);
+                        writer.Write(new byte[64 - vendorFieldBytes.Length]);
+                    }
+                }
+                else
+                {
+                    writer.Write(new byte[64]);
+                }
+
+                writer.Write(Amount);
+                writer.Write(Fee);
+
+                if (Type == Enums.TransactionTypes.SECOND_SIGNATURE_REGISTRATION)
+                {
+                    writer.Write(Encoders.Hex.DecodeData(Asset["signature"]["publicKey"]));
+                }
+
+                if (Type == Enums.TransactionTypes.DELEGATE_RESIGNATION)
+                {
+                    writer.Write(Encoding.ASCII.GetBytes(Asset["delegate"]["username"]));
+                }
+
+                if (Type == Enums.TransactionTypes.VOTE)
+                {
+                    writer.Write(Encoding.ASCII.GetBytes(string.Join("", Asset["votes"])));
+                }
+
+                if (Type == Enums.TransactionTypes.MULTI_SIGNATURE_REGISTRATION)
+                {
+                    writer.Write((byte)Asset["multisignature"]["min"]);
+                    writer.Write((byte)Asset["multisignature"]["lifetime"]);
+                    writer.Write(Encoding.ASCII.GetBytes(string.Join("", Asset["multisignature"]["keysgroup"])));
+                }
+
+                if (!skipSignature && Signature != null)
+                {
+                    writer.Write(Encoders.Hex.DecodeData(Signature));
+                }
+
+                if (!skipSecondSignature && SignSignature != null)
+                {
+                    writer.Write(Encoders.Hex.DecodeData(SignSignature));
+                }
+
+                return stream.ToArray();
+            }
         }
 
         public string Sign(string secret)
