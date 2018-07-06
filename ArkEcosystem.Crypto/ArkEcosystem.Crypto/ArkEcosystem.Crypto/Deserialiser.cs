@@ -111,8 +111,8 @@ namespace ArkEcosystem.Crypto
 
             if (transaction.Type == 4)
             {
-                var publicKey = Identity.PublicKey.FromString(transaction.SenderPublicKey);
-                transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
+                // var publicKey = Identity.PublicKey.FromString(transaction.SenderPublicKey);
+                // transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
 
                 for (int i = 0; i < transaction.Asset["multisignature"]["keysgroup"].Count; i++)
                 {

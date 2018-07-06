@@ -7,7 +7,7 @@ namespace ArkEcosystem.Crypto.Serialisers
     {
         public static void Serialise(BinaryWriter writer, TransactionModel transaction)
         {
-            writer.Write(Encoders.Base58Check.DecodeData(transaction.Asset["signature"]["publicKey"]));
+            writer.Write(Encoders.Hex.DecodeData(transaction.Asset["signature"]["publicKey"]));
         }
     }
 }

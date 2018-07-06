@@ -17,5 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="DeserialiserTest.cs" />
+    <Compile Remove="SlotTest.cs" />
   </ItemGroup>
 </Project>

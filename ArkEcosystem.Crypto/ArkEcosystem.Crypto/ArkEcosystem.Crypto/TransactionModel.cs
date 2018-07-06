@@ -79,7 +79,7 @@ namespace ArkEcosystem.Crypto
                     writer.Write(Encoders.Hex.DecodeData(Asset["signature"]["publicKey"]));
                 }
 
-                if (Type == Enums.TransactionTypes.DELEGATE_RESIGNATION)
+                if (Type == Enums.TransactionTypes.DELEGATE_REGISTRATION)
                 {
                     writer.Write(Encoding.ASCII.GetBytes(Asset["delegate"]["username"]));
                 }

@@ -1,4 +1,5 @@
 using System.IO;
+using NBitcoin.DataEncoders;
 
 namespace ArkEcosystem.Crypto.Serialisers
 {
@@ -17,13 +18,13 @@ namespace ArkEcosystem.Crypto.Serialisers
             }
             else
             {
-                joined = string.Join(transaction.Asset["multisignature"]["keysgroup"]);
+                joined = string.Join("", transaction.Asset["multisignature"]["keysgroup"]);
             }
 
             writer.Write((byte)transaction.Asset["multisignature"]["min"]);
-            writer.Write(transaction.Asset["multisignature"]["keysgroup"].Count);
+            writer.Write((byte)transaction.Asset["multisignature"]["keysgroup"].Count);
             writer.Write((byte)transaction.Asset["multisignature"]["lifetime"]);
-            writer.Write(joined);
+            writer.Write(Encoders.Hex.DecodeData(joined));
         }
     }
 }

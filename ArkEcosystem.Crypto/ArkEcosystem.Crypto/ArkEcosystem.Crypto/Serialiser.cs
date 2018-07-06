@@ -104,7 +104,7 @@ namespace ArkEcosystem.Crypto
 
             if (transaction.Signatures != null)
             {
-                writer.Write((byte)0x00);
+                writer.Write((byte)0xff);
                 writer.Write(Encoders.Hex.DecodeData(String.Join("", transaction.Signatures)));
             }
         }

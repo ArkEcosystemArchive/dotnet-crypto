@@ -19,7 +19,7 @@ namespace ArkEcosystem.Crypto.Tests.Deserialisers
 
             Assert.AreEqual((UInt64)transaction["amount"], actual.Amount);
             Assert.AreEqual((UInt64)transaction["fee"], actual.Fee);
-            Assert.AreEqual(transaction["asset"]["signature"]["publicKey"], actual.Asset["signature"]["publicKey"]);
+            Assert.AreEqual((string)transaction["asset"]["signature"]["publicKey"], actual.Asset["signature"]["publicKey"]);
             Assert.AreEqual(transaction["id"], actual.Id);
             Assert.AreEqual(transaction["network"], actual.Network);
             Assert.AreEqual(transaction["recipientId"], actual.RecipientId);
