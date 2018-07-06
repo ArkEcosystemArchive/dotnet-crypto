@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ArkEcosystem.Crypto\ArkEcosystem.Crypto\Crypto.csproj" />
+    <ProjectReference Include="..\..\ArkEcosystem.Crypto\ArkEcosystem.Crypto\ArkEcosystem.Crypto.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="DeserialiserTest.cs" />
   </ItemGroup>
 </Project>

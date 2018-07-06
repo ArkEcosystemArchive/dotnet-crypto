@@ -6,9 +6,19 @@ namespace ArkEcosystem.Crypto.Tests
     public class MessageTest
     {
         [TestMethod]
-        public void Should_Be_True()
+        public void Should_Sign_A_Message()
         {
-            Assert.IsTrue(true);
+            var message = Message.Sign("Hello World", "passphrase");
+
+            Assert.IsNotNull(message);
+        }
+
+        [TestMethod]
+        public void Should_Verify_A_Message()
+        {
+            var message = Message.Sign("Hello World", "passphrase");
+
+            Assert.IsTrue(message.Verify());
         }
     }
 }

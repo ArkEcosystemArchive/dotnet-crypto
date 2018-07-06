@@ -6,6 +6,11 @@ namespace ArkEcosystem.Crypto.Configuration
 
         public static INetwork Get()
         {
+            if (activeNetwork == null)
+            {
+                activeNetwork = new Networks.Devnet();
+            }
+
             return activeNetwork;
         }
 

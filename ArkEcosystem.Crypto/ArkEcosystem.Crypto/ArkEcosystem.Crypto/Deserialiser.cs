@@ -24,7 +24,7 @@ namespace ArkEcosystem.Crypto
             transaction = HandleHeader(transaction);
             transaction = HandleType(transaction);
 
-            if (transaction.Type == 1)
+            if (transaction.Version == 1)
             {
                 transaction = HandleVersionOne(transaction);
             }
@@ -97,32 +97,32 @@ namespace ArkEcosystem.Crypto
                 transaction.SignSignature = transaction.SecondSignature;
             }
 
-            if (transaction.Type == 3)
-            {
-                // var publicKey = Identity.PublicKey.FromString(transaction.senderPublicKey);
-                // transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
-            }
-
             if (transaction.Type == 1)
             {
-                // var publicKey = Identity.PublicKey.FromString(transaction.senderPublicKey);
-                // transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
+                var publicKey = Identity.PublicKey.FromString(transaction.SenderPublicKey);
+                transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
             }
 
-            if (transaction.VendorFieldHex != null)
+            if (transaction.Type == 3)
             {
-                transaction.VendorField = Encoding.UTF8.GetString(Encoders.Hex.DecodeData(transaction.VendorFieldHex));
+                var publicKey = Identity.PublicKey.FromString(transaction.SenderPublicKey);
+                transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
             }
 
             if (transaction.Type == 4)
             {
-                // var publicKey = Identity.PublicKey.FromString(transaction.senderPublicKey);
-                // transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
+                var publicKey = Identity.PublicKey.FromString(transaction.SenderPublicKey);
+                transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
 
                 for (int i = 0; i < transaction.Asset["multisignature"]["keysgroup"].Count; i++)
                 {
                     transaction.Asset["multisignature"]["keysgroup"][i] = "+" + transaction.Asset["multisignature"]["keysgroup"][i];
                 }
+            }
+
+            if (transaction.VendorFieldHex != null)
+            {
+                transaction.VendorField = Encoding.UTF8.GetString(Encoders.Hex.DecodeData(transaction.VendorFieldHex));
             }
 
             if (transaction.Id == null)

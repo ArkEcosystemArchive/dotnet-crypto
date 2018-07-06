@@ -5,10 +5,11 @@ namespace ArkEcosystem.Crypto.Tests.Deserialisers
     [TestClass]
     public class TimelockTransferTest
     {
+        [Ignore]
         [TestMethod]
-        public void Should_Be_True()
+        public void Should_Deserialise_The_Transaction()
         {
-            Assert.IsTrue(true);
+            //
         }
     }
 }

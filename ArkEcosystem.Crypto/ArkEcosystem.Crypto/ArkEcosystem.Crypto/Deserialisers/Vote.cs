@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 
 namespace ArkEcosystem.Crypto.Deserialisers
@@ -16,12 +17,13 @@ namespace ArkEcosystem.Crypto.Deserialisers
 
             var voteLength = reader.ReadByte() & 0xff;
 
+            transaction.Asset.Add("votes", new List<string>());
             for (int i = 0; i < voteLength; i++)
             {
                 var vote = serialised.Substring(assetOffset + 2 + i * 2 * 34, 68);
                 vote = (vote[1] == '1' ? '+' : '-') + vote.Substring(2);
 
-                transaction.Asset.Add("votes", vote);
+                transaction.Asset["votes"].Add(vote);
             }
 
             return transaction.ParseSignatures(serialised, assetOffset + 2 + voteLength * 34 * 2);

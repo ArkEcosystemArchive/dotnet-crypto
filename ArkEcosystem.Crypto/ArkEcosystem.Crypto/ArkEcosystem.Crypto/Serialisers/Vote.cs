@@ -1,4 +1,5 @@
 using System.IO;
+using NBitcoin.DataEncoders;
 
 namespace ArkEcosystem.Crypto.Serialisers
 {
@@ -12,16 +13,16 @@ namespace ArkEcosystem.Crypto.Serialisers
             {
                 if (vote.StartsWith('+'))
                 {
-                    voteBytes += "01" + vote;
+                    voteBytes += "01" + vote.Substring(1);
                 }
                 else
                 {
-                    voteBytes += "00" + vote;
+                    voteBytes += "00" + vote.Substring(1);
                 }
             }
 
-            writer.Write((byte)transaction.Asset["votes"].count);
-            writer.Write(voteBytes);
+            writer.Write((byte)transaction.Asset["votes"].Count);
+            writer.Write(Encoders.Hex.DecodeData(voteBytes));
         }
     }
 }

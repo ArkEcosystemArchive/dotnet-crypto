@@ -9,30 +9,35 @@ namespace ArkEcosystem.Crypto.Identity
     {
         static readonly RIPEMD160 Ripemd160 = new RIPEMD160();
 
-        public static string FromSecret(string secret)
+        public static string FromSecret(string secret, byte publicKeyHash = 0)
         {
-            return FromPrivateKey(PrivateKey.FromSecret(secret));
+            return FromPrivateKey(PrivateKey.FromSecret(secret), publicKeyHash);
         }
 
-        public static string FromPublicKey(PubKey publicKey)
+        public static string FromPublicKey(PubKey publicKey, byte publicKeyHash = 0)
         {
             MemoryStream stream = new MemoryStream();
 
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
                 var bytes = publicKey.ToBytes();
-                var publicKeyHash = Ripemd160.ComputeHash(bytes, 0, bytes.Length);
 
-                writer.Write(Configuration.Network.Get().GetPublicKeyHash());
-                writer.Write(publicKeyHash);
+                if (publicKeyHash != 0)
+                {
+                    writer.Write(publicKeyHash);
+                } else {
+                    writer.Write(Configuration.Network.Get().GetPublicKeyHash());
+                }
+
+                writer.Write(Ripemd160.ComputeHash(bytes, 0, bytes.Length));
 
                 return Encoders.Base58Check.EncodeData(stream.ToArray());
             }
         }
 
-        public static string FromPrivateKey(Key privateKey)
+        public static string FromPrivateKey(Key privateKey, byte publicKeyHash = 0)
         {
-            return FromPublicKey(privateKey.PubKey);
+            return FromPublicKey(privateKey.PubKey, publicKeyHash);
         }
 
         public static bool Validate(string address)

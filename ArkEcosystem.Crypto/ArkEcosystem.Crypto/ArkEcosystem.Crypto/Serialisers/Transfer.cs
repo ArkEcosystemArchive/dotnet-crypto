@@ -1,4 +1,5 @@
 using NBitcoin.DataEncoders;
+using System;
 using System.IO;
 
 namespace ArkEcosystem.Crypto.Serialisers

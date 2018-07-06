@@ -5,10 +5,11 @@ namespace ArkEcosystem.Crypto.Tests.Serialisers
     [TestClass]
     public class MultiPaymentTest
     {
+        [Ignore]
         [TestMethod]
-        public void Should_Be_True()
+        public void Should_Serialise_The_Transaction()
         {
-            Assert.IsTrue(true);
+            //
         }
     }
 }

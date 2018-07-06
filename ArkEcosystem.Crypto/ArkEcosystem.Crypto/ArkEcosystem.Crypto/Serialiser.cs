@@ -6,9 +6,9 @@ namespace ArkEcosystem.Crypto
 {
     public class Serialiser
     {
-        TransactionModel transaction;
-        MemoryStream stream;
-        BinaryWriter writer;
+        readonly TransactionModel transaction;
+        readonly MemoryStream stream;
+        readonly BinaryWriter writer;
 
         public Serialiser(TransactionModel transaction)
         {
@@ -49,13 +49,6 @@ namespace ArkEcosystem.Crypto
             else
             {
                 writer.Write((byte)0x00);
-            }
-
-            if (transaction.Type == 0)
-            {
-                writer.Write(transaction.Amount);
-                writer.Write(transaction.Expiration);
-                writer.Write(Encoders.Base58Check.DecodeData(transaction.RecipientId));
             }
         }
 
