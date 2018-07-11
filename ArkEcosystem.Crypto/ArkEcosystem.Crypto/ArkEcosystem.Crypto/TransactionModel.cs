@@ -132,21 +132,21 @@ namespace ArkEcosystem.Crypto
             }
         }
 
-        public string Sign(string secret)
+        public string Sign(string passphrase)
         {
-            SenderPublicKey = Encoders.Hex.EncodeData(Identity.PublicKey.FromSecret(secret).ToBytes());
+            SenderPublicKey = Encoders.Hex.EncodeData(Identity.PublicKey.FromPassphrase(passphrase).ToBytes());
 
             var signature = Identity.PrivateKey
-                .FromSecret(secret)
+                .FromPassphrase(passphrase)
                 .Sign(new uint256(Sha256.ComputeHash(ToBytes())));
 
             return Encoders.Hex.EncodeData(signature.ToDER());
         }
 
-        public string SecondSign(string secret)
+        public string SecondSign(string passphrase)
         {
             var signature = Identity.PrivateKey
-                .FromSecret(secret)
+                .FromPassphrase(passphrase)
                 .Sign(new uint256(Sha256.ComputeHash(ToBytes(true))));
 
             return Encoders.Hex.EncodeData(signature.ToDER());

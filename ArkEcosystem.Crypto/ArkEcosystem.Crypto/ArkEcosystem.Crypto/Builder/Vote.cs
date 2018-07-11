@@ -26,7 +26,7 @@ namespace ArkEcosystem.Crypto.Builder
 {
     public class Vote
     {
-        public static TransactionModel Create(List<string> votes, string secret, string secondSecret = null)
+        public static TransactionModel Create(List<string> votes, string passphrase, string secondPassphrase = null)
         {
             var transaction = new TransactionModel
             {
@@ -34,9 +34,9 @@ namespace ArkEcosystem.Crypto.Builder
                 Fee = Enums.TransactionFees.VOTE
             };
             transaction.Asset.Add("votes", votes);
-            transaction.RecipientId = Identity.Address.FromSecret(secret);
+            transaction.RecipientId = Identity.Address.FromPassphrase(passphrase);
 
-            return Builder.Sign(transaction, secret, secondSecret);
+            return Builder.Sign(transaction, passphrase, secondPassphrase);
         }
     }
 }

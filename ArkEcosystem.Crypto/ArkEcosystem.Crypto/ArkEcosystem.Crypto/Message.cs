@@ -43,9 +43,9 @@ namespace ArkEcosystem.Crypto
             this.message = message;
         }
 
-        public static Message Sign(string message, string secret)
+        public static Message Sign(string message, string passphrase)
         {
-            var privateKeyBytes = Sha256.ComputeHash(Encoding.ASCII.GetBytes(secret));
+            var privateKeyBytes = Sha256.ComputeHash(Encoding.ASCII.GetBytes(passphrase));
             var privateKey = new Key(privateKeyBytes);
 
             var messageBytes = Sha256.ComputeHash(Encoding.ASCII.GetBytes(message));

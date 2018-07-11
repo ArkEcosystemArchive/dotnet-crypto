@@ -24,15 +24,15 @@ namespace ArkEcosystem.Crypto.Builder
 {
     public class Builder
     {
-        public static TransactionModel Sign(TransactionModel transaction, string secret, string secondSecret = null)
+        public static TransactionModel Sign(TransactionModel transaction, string passphrase, string secondPassphrase = null)
         {
             transaction.Timestamp = Slot.GetTime();
 
-            transaction.Signature = transaction.Sign(secret);
+            transaction.Signature = transaction.Sign(passphrase);
 
-            if (secondSecret != null)
+            if (secondPassphrase != null)
             {
-                transaction.SignSignature = transaction.SecondSign(secondSecret);
+                transaction.SignSignature = transaction.SecondSign(secondPassphrase);
             }
 
             transaction.Id = transaction.GetId();

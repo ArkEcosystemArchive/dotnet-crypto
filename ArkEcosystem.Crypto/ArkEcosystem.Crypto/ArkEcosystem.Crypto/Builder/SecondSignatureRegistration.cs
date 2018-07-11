@@ -27,7 +27,7 @@ namespace ArkEcosystem.Crypto.Builder
 {
     public class SecondSignatureRegistration
     {
-        public static TransactionModel Create(string secret, string secondSecret)
+        public static TransactionModel Create(string passphrase, string secondPassphrase)
         {
             var transaction = new TransactionModel
             {
@@ -36,10 +36,10 @@ namespace ArkEcosystem.Crypto.Builder
             };
 
             transaction.Asset.Add("signature", new Dictionary<string, string>());
-            var publicKey = Encoders.Hex.EncodeData(Identity.PublicKey.FromSecret(secondSecret).ToBytes());
+            var publicKey = Encoders.Hex.EncodeData(Identity.PublicKey.FromPassphrase(secondPassphrase).ToBytes());
             transaction.Asset["signature"].Add("publicKey", publicKey);
 
-            return Builder.Sign(transaction, secret, secondSecret);
+            return Builder.Sign(transaction, passphrase, secondPassphrase);
         }
     }
 }

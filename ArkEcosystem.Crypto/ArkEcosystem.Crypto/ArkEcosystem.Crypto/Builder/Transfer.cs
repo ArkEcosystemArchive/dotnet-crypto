@@ -24,7 +24,7 @@ namespace ArkEcosystem.Crypto.Builder
 {
     public class Transfer
     {
-        public static TransactionModel Create(string recipientId, ulong amount, string vendorField, string secret, string secondSecret = null)
+        public static TransactionModel Create(string recipientId, ulong amount, string vendorField, string passphrase, string secondPassphrase = null)
         {
             var transaction = new TransactionModel
             {
@@ -35,7 +35,7 @@ namespace ArkEcosystem.Crypto.Builder
                 VendorField = vendorField
             };
 
-            return Builder.Sign(transaction, secret, secondSecret);
+            return Builder.Sign(transaction, passphrase, secondPassphrase);
         }
     }
 }

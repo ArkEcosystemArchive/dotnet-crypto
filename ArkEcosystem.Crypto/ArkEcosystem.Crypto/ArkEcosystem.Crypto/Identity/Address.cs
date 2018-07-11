@@ -31,9 +31,9 @@ namespace ArkEcosystem.Crypto.Identity
     {
         static readonly RIPEMD160 Ripemd160 = new RIPEMD160();
 
-        public static string FromSecret(string secret, byte publicKeyHash = 0)
+        public static string FromPassphrase(string passphrase, byte publicKeyHash = 0)
         {
-            return FromPrivateKey(PrivateKey.FromSecret(secret), publicKeyHash);
+            return FromPrivateKey(PrivateKey.FromPassphrase(passphrase), publicKeyHash);
         }
 
         public static string FromPublicKey(PubKey publicKey, byte publicKeyHash = 0)

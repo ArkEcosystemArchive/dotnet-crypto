@@ -30,9 +30,9 @@ namespace ArkEcosystem.Crypto.Identity
     {
         static readonly SHA256 Sha256 = SHA256.Create();
 
-        public static Key FromSecret(string secret)
+        public static Key FromPassphrase(string passphrase)
         {
-            var privateKeyHash = Sha256.ComputeHash(Encoding.ASCII.GetBytes(secret));
+            var privateKeyHash = Sha256.ComputeHash(Encoding.ASCII.GetBytes(passphrase));
 
             return new Key(privateKeyHash);
         }

@@ -26,7 +26,7 @@ namespace ArkEcosystem.Crypto.Builder
 {
     public class DelegateRegistration
     {
-        public static TransactionModel Create(string username, string secret, string secondSecret = null)
+        public static TransactionModel Create(string username, string passphrase, string secondPassphrase = null)
         {
             var transaction = new TransactionModel
             {
@@ -36,7 +36,7 @@ namespace ArkEcosystem.Crypto.Builder
             transaction.Asset.Add("delegate", new Dictionary<string, string>());
             transaction.Asset["delegate"].Add("username", username);
 
-            return Builder.Sign(transaction, secret, secondSecret);
+            return Builder.Sign(transaction, passphrase, secondPassphrase);
         }
     }
 }

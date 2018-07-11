@@ -39,7 +39,7 @@ namespace ArkEcosystem.Crypto.Tests.Identity
         [TestMethod]
         public void Should_Get_The_Address_From_Secret()
         {
-            var actual = Crypto.Identity.Address.FromSecret("this is a top secret passphrase", 0x1e);
+            var actual = Crypto.Identity.Address.FromPassphrase("this is a top secret passphrase", 0x1e);
 
             Assert.AreEqual("D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib", actual);
         }
@@ -47,7 +47,7 @@ namespace ArkEcosystem.Crypto.Tests.Identity
         [TestMethod]
         public void Should_Get_The_Address_From_Private_Key()
         {
-            var privateKey = Crypto.Identity.PrivateKey.FromSecret("this is a top secret passphrase");
+            var privateKey = Crypto.Identity.PrivateKey.FromPassphrase("this is a top secret passphrase");
             var actual = Crypto.Identity.Address.FromPrivateKey(privateKey, 0x1e);
 
             Assert.AreEqual("D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib", actual);
