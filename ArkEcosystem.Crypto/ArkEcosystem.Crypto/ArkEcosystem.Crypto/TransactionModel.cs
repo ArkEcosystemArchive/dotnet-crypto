@@ -172,9 +172,9 @@ namespace ArkEcosystem.Crypto
                 .Verify(new uint256(Sha256.ComputeHash(transactionBytes)), signature);
         }
 
-        public TransactionModel ParseSignatures(string serialised, int startOffset)
+        public TransactionModel ParseSignatures(string serialized, int startOffset)
         {
-            Signature = serialised.Substring(startOffset);
+            Signature = serialized.Substring(startOffset);
 
             var multiSignatureOffset = 0;
 
@@ -185,9 +185,9 @@ namespace ArkEcosystem.Crypto
             else
             {
                 var signatureLength = Convert.ToByte(Signature.Substring(2, 2), 16) + 2;
-                Signature = serialised.Substring(startOffset, signatureLength * 2);
+                Signature = serialized.Substring(startOffset, signatureLength * 2);
                 multiSignatureOffset += signatureLength * 2;
-                SecondSignature = serialised.Substring(startOffset + signatureLength * 2);
+                SecondSignature = serialized.Substring(startOffset + signatureLength * 2);
 
                 if (SecondSignature.Length == 0)
                 {
@@ -207,7 +207,7 @@ namespace ArkEcosystem.Crypto
                     }
                 }
 
-                var signatures = serialised.Substring(startOffset + multiSignatureOffset);
+                var signatures = serialized.Substring(startOffset + multiSignatureOffset);
 
                 if (signatures.Length == 0)
                 {
