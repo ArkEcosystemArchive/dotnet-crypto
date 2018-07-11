@@ -1,1 +1,7 @@
-language: dotnet
+language: csharp
+mono: none
+dotnet: 2.1
+script:
+  # - dotnet restore
+  - dotnet build ./ArkEcosystem.Crypto/ArkEcosystem.Crypto
+  - dotnet test ./ArkEcosystem.Crypto/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.sln
