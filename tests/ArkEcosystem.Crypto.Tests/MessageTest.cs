@@ -30,17 +30,38 @@ namespace ArkEcosystem.Crypto.Tests
         [TestMethod]
         public void Should_Sign_A_Message()
         {
-            var message = Message.Sign("Hello World", "passphrase");
+            var fixture = TestHelper.ReadFixture("message");
+            var message = Message.Sign((string)fixture["data"]["message"], fixture["passphrase"]);
 
-            Assert.IsNotNull(message);
+            Assert.AreEqual((string)fixture["data"]["publickey"], message.publicKey);
+            Assert.AreEqual((string)fixture["data"]["signature"], message.signature);
+            Assert.AreEqual((string)fixture["data"]["message"], message.message);
         }
 
         [TestMethod]
         public void Should_Verify_A_Message()
         {
-            var message = Message.Sign("Hello World", "passphrase");
+            var fixture = TestHelper.ReadFixture("message");
+            var message = new Message(
+                (string)fixture["data"]["publickey"],
+                (string)fixture["data"]["signature"],
+                (string)fixture["data"]["message"]
+            );
 
             Assert.IsTrue(message.Verify());
+        }
+
+        [TestMethod]
+        public void Should_Convert_Message_To_Json()
+        {
+            var fixture = TestHelper.ReadFixture("message");
+            var message = new Message(
+                (string)fixture["data"]["publickey"],
+                (string)fixture["data"]["signature"],
+                (string)fixture["data"]["message"]
+            );
+
+            Assert.AreEqual(fixture["data"].ToString(), message.ToJson());
         }
     }
 }

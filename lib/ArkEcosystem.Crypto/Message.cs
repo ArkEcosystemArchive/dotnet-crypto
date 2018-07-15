@@ -32,9 +32,9 @@ namespace ArkEcosystem.Crypto
     public class Message
     {
         static readonly System.Security.Cryptography.SHA256 Sha256 = System.Security.Cryptography.SHA256.Create();
-        readonly string publicKey;
-        readonly string signature;
-        readonly string message;
+        public readonly string publicKey;
+        public readonly string signature;
+        public readonly string message;
 
         public Message(string publicKey, string signature, string message)
         {
