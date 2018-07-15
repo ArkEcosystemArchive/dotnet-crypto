@@ -30,9 +30,10 @@ namespace ArkEcosystem.Crypto.Tests.Identity
         [TestMethod]
         public void Should_Get_The_Address_From_Public_Key()
         {
-            var actual = Crypto.Identity.WIF.FromPassphrase("this is a top secret passphrase");
+            var fixture = TestHelper.ReadFixture("identity");
+            var actual = Crypto.Identity.WIF.FromPassphrase((string)fixture["passphrase"]);
 
-            Assert.AreEqual("SGq4xLgZKCGxs7bjmwnBrWcT4C1ADFEermj846KC97FSv1WFD1dA", actual);
+            Assert.AreEqual((string)fixture["data"]["wif"], actual);
         }
     }
 }

@@ -30,33 +30,37 @@ namespace ArkEcosystem.Crypto.Tests.Identity
         [TestMethod]
         public void Should_Get_The_Address_From_Public_Key()
         {
-            var publicKey = Crypto.Identity.PublicKey.FromString("034151a3ec46b5670a682b0a63394f863587d1bc97483b1b6c70eb58e7f0aed192");
+            var fixture = TestHelper.ReadFixture("identity");
+            var publicKey = Crypto.Identity.PublicKey.FromString((string)fixture["data"]["publicKey"]);
             var actual = Crypto.Identity.Address.FromPublicKey(publicKey, 0x1e);
 
-            Assert.AreEqual("D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib", actual);
+            Assert.AreEqual((string)fixture["data"]["address"], actual);
         }
 
         [TestMethod]
-        public void Should_Get_The_Address_From_Secret()
+        public void Should_Get_The_Address_From_Passphrase()
         {
-            var actual = Crypto.Identity.Address.FromPassphrase("this is a top secret passphrase", 0x1e);
+            var fixture = TestHelper.ReadFixture("identity");
+            var actual = Crypto.Identity.Address.FromPassphrase(fixture["passphrase"], 0x1e);
 
-            Assert.AreEqual("D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib", actual);
+            Assert.AreEqual((string)fixture["data"]["address"], actual);
         }
 
         [TestMethod]
         public void Should_Get_The_Address_From_Private_Key()
         {
-            var privateKey = Crypto.Identity.PrivateKey.FromPassphrase("this is a top secret passphrase");
+            var fixture = TestHelper.ReadFixture("identity");
+            var privateKey = Crypto.Identity.PrivateKey.FromPassphrase(fixture["passphrase"]);
             var actual = Crypto.Identity.Address.FromPrivateKey(privateKey, 0x1e);
 
-            Assert.AreEqual("D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib", actual);
+            Assert.AreEqual((string)fixture["data"]["address"], actual);
         }
 
         [TestMethod]
         public void Should_Validate_The_Address()
         {
-            var actual = Crypto.Identity.Address.Validate("D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib", 0x1e);
+            var fixture = TestHelper.ReadFixture("identity");
+            var actual = Crypto.Identity.Address.Validate((string)fixture["data"]["address"], 0x1e);
 
             Assert.IsTrue(actual);
         }
