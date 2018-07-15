@@ -21,6 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ArkEcosystem.Crypto.Tests;
 
 namespace ArkEcosystem.Crypto.Tests.Deserializers
 {
@@ -29,9 +30,13 @@ namespace ArkEcosystem.Crypto.Tests.Deserializers
     {
         [Ignore]
         [TestMethod]
-        public void Should_Deserialize_The_Transaction()
+        public void Should_Deserialize_The_Transaction_With_A_Passphrase()
         {
-            //
+            var fixture = TestHelper.ReadTransactionFixture("timelock_transfer", "passphrase");
+            var transaction = fixture["data"];
+            var actual = new Deserializer(fixture["serialized"]).Deserialize();
+
+            Assert.AreEqual(transaction["id"], actual.Id);
         }
     }
 }

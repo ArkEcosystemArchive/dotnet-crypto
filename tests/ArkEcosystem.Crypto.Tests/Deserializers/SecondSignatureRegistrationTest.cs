@@ -26,6 +26,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using ArkEcosystem.Crypto.Identity;
 
 namespace ArkEcosystem.Crypto.Tests.Deserializers
 {
@@ -33,25 +34,25 @@ namespace ArkEcosystem.Crypto.Tests.Deserializers
     public class SecondSignatureRegistrationTest
     {
         [TestMethod]
-        public void Should_Deserialize_The_Transaction()
+        public void Should_Deserialize_The_Transaction_With_A_Passphrase()
         {
-            var fixture = File.ReadAllText("../../../fixtures/second_signature_registration.json");
-            var transaction = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(fixture);
-            var actual = new Deserializer(transaction["serialized"]).Deserialize();
+            var fixture = TestHelper.ReadTransactionFixture("second_signature_registration", "second-passphrase");
+            var transaction = fixture["data"];
+            var actual = new Deserializer(fixture["serialized"]).Deserialize();
 
-            Assert.AreEqual((UInt64)transaction["amount"], actual.Amount);
+            Assert.AreEqual(1, actual.Version);
+            Assert.AreEqual(30, actual.Network);
+            Assert.AreEqual((byte)transaction["type"], actual.Type);
+            Assert.AreEqual((UInt32)transaction["timestamp"], actual.Timestamp);
+            Assert.AreEqual((string)transaction["senderPublicKey"], actual.SenderPublicKey);
             Assert.AreEqual((UInt64)transaction["fee"], actual.Fee);
+            Assert.AreEqual((UInt64)transaction["amount"], actual.Amount);
+            Assert.AreEqual((string)transaction["signature"], actual.Signature);
+            Assert.AreEqual((string)transaction["id"], actual.Id);
             Assert.AreEqual((string)transaction["asset"]["signature"]["publicKey"], actual.Asset["signature"]["publicKey"]);
-            Assert.AreEqual(transaction["id"], actual.Id);
-            Assert.AreEqual(transaction["network"], actual.Network);
-            Assert.AreEqual(transaction["recipientId"], actual.RecipientId);
-            Assert.AreEqual(transaction["senderPublicKey"], actual.SenderPublicKey);
-            Assert.AreEqual(transaction["signature"], actual.Signature);
-            Assert.AreEqual(transaction["timestamp"], actual.Timestamp);
-            Assert.AreEqual(transaction["type"], actual.Type);
-            Assert.AreEqual(transaction["version"], actual.Version);
 
-            Assert.AreEqual(transaction["serialized"], Encoders.Hex.EncodeData(new Serializer(actual).Serialize()));
+            // special case as the type 1 transaction itself has no recipientId
+            Assert.AreEqual(Address.FromPublicKey(PublicKey.FromString(actual.SenderPublicKey)), actual.RecipientId);
         }
     }
 }

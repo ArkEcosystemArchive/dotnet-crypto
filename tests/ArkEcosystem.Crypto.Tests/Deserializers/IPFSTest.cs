@@ -29,9 +29,13 @@ namespace ArkEcosystem.Crypto.Tests.Deserializers
     {
         [Ignore]
         [TestMethod]
-        public void Should_Deserialize_The_Transaction()
+        public void Should_Deserialize_The_Transaction_With_A_Passphrase()
         {
-            //
+            var fixture = TestHelper.ReadTransactionFixture("ipfs", "passphrase");
+            var transaction = fixture["data"];
+            var actual = new Deserializer(fixture["serialized"]).Deserialize();
+
+            Assert.AreEqual(transaction["id"], actual.Id);
         }
     }
 }
