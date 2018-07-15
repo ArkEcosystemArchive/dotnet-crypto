@@ -35,11 +35,13 @@ namespace ArkEcosystem.Crypto.Tests.Serializers
         [TestMethod]
         public void Should_Serialize_The_Transaction()
         {
-            var fixture = File.ReadAllText("../../../fixtures/vote.json");
-            var transaction = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(fixture);
-            var actual = new Deserializer(transaction["serialized"]).Deserialize();
+            var fixture = TestHelper.ReadTransactionFixture("transfer", "passphrase");
+            var transaction = fixture["data"];
 
-            Assert.AreEqual(transaction["serialized"], Encoders.Hex.EncodeData(new Serializer(actual).Serialize()));
+            var transactionModel = new Deserializer(fixture["serialized"]).Deserialize();
+            var actual = new Serializer(transactionModel).Serialize();
+
+            Assert.AreEqual(fixture["serialized"], Encoders.Hex.EncodeData(actual));
         }
     }
 }

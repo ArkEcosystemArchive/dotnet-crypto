@@ -21,6 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NBitcoin.DataEncoders;
 
 namespace ArkEcosystem.Crypto.Tests.Serializers
 {
@@ -31,7 +32,13 @@ namespace ArkEcosystem.Crypto.Tests.Serializers
         [TestMethod]
         public void Should_Serialize_The_Transaction()
         {
-            //
+            var fixture = TestHelper.ReadTransactionFixture("delegate_resignation", "passphrase");
+            var transaction = fixture["data"];
+
+            var transactionModel = new Deserializer(fixture["serialized"]).Deserialize();
+            var actual = new Serializer(transactionModel).Serialize();
+
+            Assert.AreEqual(fixture["serialized"], Encoders.Hex.EncodeData(actual));
         }
     }
 }
