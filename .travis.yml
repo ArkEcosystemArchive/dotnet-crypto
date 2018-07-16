@@ -6,7 +6,7 @@ dotnet: 2.1
 
 script:
   - dotnet build ./lib/ArkEcosystem.Crypto
-  - dotnet test ./tests/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.sln
+  - dotnet test ./tests/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.csproj
 
 git:
   depth: 1
