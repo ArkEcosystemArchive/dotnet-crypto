@@ -119,12 +119,6 @@ namespace ArkEcosystem.Crypto
                 transaction.SignSignature = transaction.SecondSignature;
             }
 
-            if (transaction.Type == 1)
-            {
-                var publicKey = Identity.PublicKey.FromString(transaction.SenderPublicKey);
-                transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
-            }
-
             if (transaction.Type == 3)
             {
                 var publicKey = Identity.PublicKey.FromString(transaction.SenderPublicKey);
@@ -133,9 +127,6 @@ namespace ArkEcosystem.Crypto
 
             if (transaction.Type == 4)
             {
-                // var publicKey = Identity.PublicKey.FromString(transaction.SenderPublicKey);
-                // transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
-
                 for (int i = 0; i < transaction.Asset["multisignature"]["keysgroup"].Count; i++)
                 {
                     transaction.Asset["multisignature"]["keysgroup"][i] = "+" + transaction.Asset["multisignature"]["keysgroup"][i];
@@ -150,6 +141,12 @@ namespace ArkEcosystem.Crypto
             if (transaction.Id == null)
             {
                 transaction.Id = transaction.GetId();
+            }
+
+            if (transaction.Type == 1 || transaction.Type == 4)
+            {
+                var publicKey = Identity.PublicKey.FromString(transaction.SenderPublicKey);
+                transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
             }
 
             return transaction;
