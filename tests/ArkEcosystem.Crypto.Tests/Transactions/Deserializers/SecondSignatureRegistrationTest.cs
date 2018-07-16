@@ -52,7 +52,7 @@ namespace ArkEcosystem.Crypto.Tests.Transactions.Deserializers
             Assert.AreEqual((string)transaction["asset"]["signature"]["publicKey"], actual.Asset["signature"]["publicKey"]);
 
             // special case as the type 1 transaction itself has no recipientId
-            Assert.AreEqual(Address.FromPublicKey(PublicKey.FromString(actual.SenderPublicKey)), actual.RecipientId);
+            Assert.AreEqual(Address.FromPublicKey(PublicKey.FromHex(actual.SenderPublicKey)), actual.RecipientId);
         }
     }
 }

@@ -59,79 +59,6 @@ namespace ArkEcosystem.Crypto.Transactions
             return Encoders.Hex.EncodeData(Sha256.ComputeHash(ToBytes(false, false)));
         }
 
-        public byte[] ToBytes(bool skipSignature = true, bool skipSecondSignature = true)
-        {
-            MemoryStream stream = new MemoryStream();
-
-            using (BinaryWriter writer = new BinaryWriter(stream))
-            {
-                writer.Write(Type);
-                writer.Write(Timestamp);
-                writer.Write(Encoders.Hex.DecodeData(SenderPublicKey));
-
-                if (RecipientId != null)
-                {
-                    writer.Write(Encoders.Base58Check.DecodeData(RecipientId));
-                }
-                else
-                {
-                    writer.Write(new byte[21]);
-                }
-
-                if (VendorField != null)
-                {
-                    var vendorFieldBytes = Encoding.ASCII.GetBytes(VendorField);
-
-                    if (vendorFieldBytes.Length < 65)
-                    {
-                        writer.Write(vendorFieldBytes);
-                        writer.Write(new byte[64 - vendorFieldBytes.Length]);
-                    }
-                }
-                else
-                {
-                    writer.Write(new byte[64]);
-                }
-
-                writer.Write(Amount);
-                writer.Write(Fee);
-
-                if (Type == Enums.TransactionTypes.SECOND_SIGNATURE_REGISTRATION)
-                {
-                    writer.Write(Encoders.Hex.DecodeData(Asset["signature"]["publicKey"]));
-                }
-
-                if (Type == Enums.TransactionTypes.DELEGATE_REGISTRATION)
-                {
-                    writer.Write(Encoding.ASCII.GetBytes(Asset["delegate"]["username"]));
-                }
-
-                if (Type == Enums.TransactionTypes.VOTE)
-                {
-                    writer.Write(Encoding.ASCII.GetBytes(string.Join("", Asset["votes"])));
-                }
-
-                if (Type == Enums.TransactionTypes.MULTI_SIGNATURE_REGISTRATION)
-                {
-                    writer.Write((byte)Asset["multisignature"]["min"]);
-                    writer.Write((byte)Asset["multisignature"]["lifetime"]);
-                    writer.Write(Encoding.ASCII.GetBytes(string.Join("", Asset["multisignature"]["keysgroup"])));
-                }
-
-                if (!skipSignature && Signature != null)
-                {
-                    writer.Write(Encoders.Hex.DecodeData(Signature));
-                }
-
-                if (!skipSecondSignature && SignSignature != null)
-                {
-                    writer.Write(Encoders.Hex.DecodeData(SignSignature));
-                }
-
-                return stream.ToArray();
-            }
-        }
-
         public string Sign(string passphrase)
         {
             SenderPublicKey = Encoders.Hex.EncodeData(Identity.PublicKey.FromPassphrase(passphrase).ToBytes());
@@ -158,7 +85,7 @@ namespace ArkEcosystem.Crypto.Transactions
             var transactionBytes = ToBytes();
 
             return Identity.PublicKey
-                .FromString(SenderPublicKey)
+                .FromHex(SenderPublicKey)
                 .Verify(new uint256(Sha256.ComputeHash(transactionBytes)), signature);
         }
 
@@ -168,7 +95,7 @@ namespace ArkEcosystem.Crypto.Transactions
             var transactionBytes = ToBytes(false);
 
             return Identity.PublicKey
-                .FromString(secondPublicKey)
+                .FromHex(secondPublicKey)
                 .Verify(new uint256(Sha256.ComputeHash(transactionBytes)), signature);
         }
 
@@ -243,6 +170,79 @@ namespace ArkEcosystem.Crypto.Transactions
             }
 
             return this;
+        }
+
+        public byte[] ToBytes(bool skipSignature = true, bool skipSecondSignature = true)
+        {
+            MemoryStream stream = new MemoryStream();
+
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write(Type);
+                writer.Write(Timestamp);
+                writer.Write(Encoders.Hex.DecodeData(SenderPublicKey));
+
+                if (RecipientId != null)
+                {
+                    writer.Write(Encoders.Base58Check.DecodeData(RecipientId));
+                }
+                else
+                {
+                    writer.Write(new byte[21]);
+                }
+
+                if (VendorField != null)
+                {
+                    var vendorFieldBytes = Encoding.ASCII.GetBytes(VendorField);
+
+                    if (vendorFieldBytes.Length < 65)
+                    {
+                        writer.Write(vendorFieldBytes);
+                        writer.Write(new byte[64 - vendorFieldBytes.Length]);
+                    }
+                }
+                else
+                {
+                    writer.Write(new byte[64]);
+                }
+
+                writer.Write(Amount);
+                writer.Write(Fee);
+
+                if (Type == Enums.TransactionTypes.SECOND_SIGNATURE_REGISTRATION)
+                {
+                    writer.Write(Encoders.Hex.DecodeData(Asset["signature"]["publicKey"]));
+                }
+
+                if (Type == Enums.TransactionTypes.DELEGATE_REGISTRATION)
+                {
+                    writer.Write(Encoding.ASCII.GetBytes(Asset["delegate"]["username"]));
+                }
+
+                if (Type == Enums.TransactionTypes.VOTE)
+                {
+                    writer.Write(Encoding.ASCII.GetBytes(string.Join("", Asset["votes"])));
+                }
+
+                if (Type == Enums.TransactionTypes.MULTI_SIGNATURE_REGISTRATION)
+                {
+                    writer.Write((byte)Asset["multisignature"]["min"]);
+                    writer.Write((byte)Asset["multisignature"]["lifetime"]);
+                    writer.Write(Encoding.ASCII.GetBytes(string.Join("", Asset["multisignature"]["keysgroup"])));
+                }
+
+                if (!skipSignature && Signature != null)
+                {
+                    writer.Write(Encoders.Hex.DecodeData(Signature));
+                }
+
+                if (!skipSecondSignature && SignSignature != null)
+                {
+                    writer.Write(Encoders.Hex.DecodeData(SignSignature));
+                }
+
+                return stream.ToArray();
+            }
         }
     }
 }

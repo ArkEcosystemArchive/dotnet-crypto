@@ -31,9 +31,9 @@ namespace ArkEcosystem.Crypto.Identity
             return PrivateKey.FromPassphrase(passphrase).PubKey;
         }
 
-        public static PubKey FromString(string hex)
+        public static PubKey FromHex(string publicKey)
         {
-            return new PubKey(hex);
+            return new PubKey(publicKey);
         }
     }
 }

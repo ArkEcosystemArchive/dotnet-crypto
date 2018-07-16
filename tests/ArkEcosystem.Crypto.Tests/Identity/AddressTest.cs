@@ -31,7 +31,7 @@ namespace ArkEcosystem.Crypto.Tests.Identity
         public void Should_Get_The_Address_From_Public_Key()
         {
             var fixture = TestHelper.ReadFixture("identity");
-            var publicKey = Crypto.Identity.PublicKey.FromString((string)fixture["data"]["publicKey"]);
+            var publicKey = Crypto.Identity.PublicKey.FromHex((string)fixture["data"]["publicKey"]);
             var actual = Crypto.Identity.Address.FromPublicKey(publicKey, 0x1e);
 
             Assert.AreEqual((string)fixture["data"]["address"], actual);

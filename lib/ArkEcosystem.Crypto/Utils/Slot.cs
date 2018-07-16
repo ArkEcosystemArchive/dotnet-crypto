@@ -28,7 +28,12 @@ namespace ArkEcosystem.Crypto
     {
         public static uint GetTime()
         {
-            return Convert.ToUInt32((DateTime.UtcNow - Configuration.Network.Get().GetEpoch()).TotalMilliseconds / 1000);
+            return Convert.ToUInt32((DateTime.UtcNow - GetEpoch()).TotalMilliseconds / 1000);
+        }
+
+        public static DateTime GetEpoch()
+        {
+            return Configuration.Network.Get().GetEpoch();
         }
     }
 }
