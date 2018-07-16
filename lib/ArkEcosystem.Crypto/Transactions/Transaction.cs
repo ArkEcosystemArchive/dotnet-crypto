@@ -23,6 +23,7 @@
 
 using NBitcoin;
 using NBitcoin.DataEncoders;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -244,6 +245,43 @@ namespace ArkEcosystem.Crypto.Transactions
 
                 return stream.ToArray();
             }
+        }
+
+        public byte[] Serialize()
+        {
+            return new Serializer(this).Serialize();
+        }
+
+        public static Transaction Deserialize(string serialized)
+        {
+            return new Deserializer(serialized).Deserialize();
+        }
+
+        public Dictionary<string, dynamic> ToDictionary()
+        {
+            return new Dictionary<string, dynamic>
+            {
+                ["amount"] = Amount,
+                ["asset"] = Asset,
+                ["fee"] = Fee,
+                ["id"] = Id,
+                ["network"] = Network,
+                ["recipientId"] = RecipientId,
+                ["secondSignature"] = SecondSignature,
+                ["senderPublicKey"] = SenderPublicKey,
+                ["signature"] = Signature,
+                ["signatures"] = Signatures,
+                ["signSignature"] = SignSignature,
+                ["timestamp"] = Timestamp,
+                ["type"] = Type,
+                ["vendorField"] = VendorField,
+                ["version"] = Version,
+            };
+        }
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(ToDictionary());
         }
     }
 }

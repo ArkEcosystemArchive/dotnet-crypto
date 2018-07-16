@@ -55,11 +55,11 @@
 - [x] verify
 - [x] secondVerify
 - [x] parseSignatures
-- [ ] serialize
-- [ ] deserialize
+- [x] serialize
+- [x] deserialize
 - [x] toBytes
-- [ ] toDictionary
-- [ ] toJson
+- [x] toDictionary
+- [x] toJson
 
 ### Message
 - [x] sign
