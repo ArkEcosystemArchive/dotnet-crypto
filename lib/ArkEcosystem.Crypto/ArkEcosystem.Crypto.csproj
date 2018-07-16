@@ -13,9 +13,4 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Utils\ArkSettings.cs" />
-    <Compile Remove="Utils\ArkStaticStrings.cs" />
-    <Compile Remove="Utils\ArkUtils.cs" />
-  </ItemGroup>
 </Project>
