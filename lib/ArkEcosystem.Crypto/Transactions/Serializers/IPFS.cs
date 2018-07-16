@@ -20,13 +20,14 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using System.IO;
 
 namespace ArkEcosystem.Crypto.Transactions.Serializers
 {
     public static class IPFS
     {
-        public static void Serialize(BinaryWriter writer, TransactionModel transaction)
+        public static void Serialize(BinaryWriter writer, Transaction transaction)
         {
             writer.Write((byte)(transaction.Asset["ipfs"]["dag"].length / 2));
             writer.Write(transaction.Asset["ipfs"]["dag"]);

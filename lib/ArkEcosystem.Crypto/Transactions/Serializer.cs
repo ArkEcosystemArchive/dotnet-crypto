@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using NBitcoin.DataEncoders;
 using System;
 using System.IO;
@@ -28,11 +29,11 @@ namespace ArkEcosystem.Crypto.Transactions
 {
     public class Serializer
     {
-        readonly TransactionModel transaction;
+        readonly Transaction transaction;
         readonly MemoryStream stream;
         readonly BinaryWriter writer;
 
-        public Serializer(TransactionModel transaction)
+        public Serializer(Transaction transaction)
         {
             this.transaction = transaction;
             stream = new MemoryStream();

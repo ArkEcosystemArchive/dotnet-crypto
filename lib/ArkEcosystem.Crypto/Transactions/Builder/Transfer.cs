@@ -20,13 +20,14 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 namespace ArkEcosystem.Crypto.Transactions.Builder
 {
     public class Transfer
     {
-        public static TransactionModel Create(string recipientId, ulong amount, string vendorField, string passphrase, string secondPassphrase = null)
+        public static Transaction Create(string recipientId, ulong amount, string vendorField, string passphrase, string secondPassphrase = null)
         {
-            var transaction = new TransactionModel
+            var transaction = new Transaction
             {
                 Type = Enums.TransactionTypes.TRANSFER,
                 Fee = Enums.TransactionFees.TRANSFER,

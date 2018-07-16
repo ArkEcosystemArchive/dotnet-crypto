@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using NBitcoin;
 using NBitcoin.DataEncoders;
 using System;
@@ -29,7 +30,7 @@ using System.Text;
 
 namespace ArkEcosystem.Crypto.Transactions
 {
-    public class TransactionModel
+    public class Transaction
     {
         static readonly System.Security.Cryptography.SHA256 Sha256 = System.Security.Cryptography.SHA256.Create();
 
@@ -99,7 +100,7 @@ namespace ArkEcosystem.Crypto.Transactions
                 .Verify(new uint256(Sha256.ComputeHash(transactionBytes)), signature);
         }
 
-        public TransactionModel ParseSignatures(string serialized, int startOffset)
+        public Transaction ParseSignatures(string serialized, int startOffset)
         {
             Signature = serialized.Substring(startOffset);
 

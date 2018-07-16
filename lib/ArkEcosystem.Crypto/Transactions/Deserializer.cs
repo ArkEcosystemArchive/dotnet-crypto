@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using NBitcoin.DataEncoders;
 using System.Text;
 using System.IO;
@@ -40,9 +41,9 @@ namespace ArkEcosystem.Crypto.Transactions
             reader = new BinaryReader(stream);
         }
 
-        public TransactionModel Deserialize()
+        public Transaction Deserialize()
         {
-            var transaction = new TransactionModel();
+            var transaction = new Transaction();
             transaction = HandleHeader(transaction);
             transaction = HandleType(transaction);
 
@@ -54,7 +55,7 @@ namespace ArkEcosystem.Crypto.Transactions
             return transaction;
         }
 
-        public TransactionModel HandleHeader(TransactionModel transaction)
+        public Transaction HandleHeader(Transaction transaction)
         {
             transaction.Header = reader.ReadByte();
             transaction.Version = reader.ReadByte();
@@ -76,7 +77,7 @@ namespace ArkEcosystem.Crypto.Transactions
             return transaction;
         }
 
-        TransactionModel HandleType(TransactionModel transaction)
+        Transaction HandleType(Transaction transaction)
         {
             switch (transaction.Type)
             {
@@ -112,7 +113,7 @@ namespace ArkEcosystem.Crypto.Transactions
             return transaction;
         }
 
-        TransactionModel HandleVersionOne(TransactionModel transaction)
+        Transaction HandleVersionOne(Transaction transaction)
         {
             if (transaction.SecondSignature != "")
             {

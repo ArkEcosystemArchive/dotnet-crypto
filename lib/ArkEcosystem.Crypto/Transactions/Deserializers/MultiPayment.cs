@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using NBitcoin.DataEncoders;
 using System.Collections.Generic;
 using System.IO;
@@ -28,10 +29,10 @@ namespace ArkEcosystem.Crypto.Transactions.Deserializers
 {
     public static class MultiPayment
     {
-        public static TransactionModel Deserialize(
+        public static Transaction Deserialize(
             BinaryReader reader,
             MemoryStream stream,
-            TransactionModel transaction,
+            Transaction transaction,
             string serialized,
             int assetOffset
         )
