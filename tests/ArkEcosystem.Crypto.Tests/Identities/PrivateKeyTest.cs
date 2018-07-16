@@ -20,20 +20,21 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using NBitcoin;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArkEcosystem.Crypto.Identity
+namespace ArkEcosystem.Crypto.Tests.Identities
 {
-    public static class PublicKey
+    [TestClass]
+    public class PrivateKeyTest
     {
-        public static PubKey FromPassphrase(string passphrase)
+        [Ignore]
+        [TestMethod]
+        public void Should_Get_The_Address_From_Public_Key()
         {
-            return PrivateKey.FromPassphrase(passphrase).PubKey;
-        }
+            var fixture = TestHelper.ReadFixture("identity");
+            var actual = Crypto.Identities.PrivateKey.FromPassphrase((string)fixture["passphrase"]);
 
-        public static PubKey FromHex(string publicKey)
-        {
-            return new PubKey(publicKey);
+            Assert.AreEqual(fixture["data"]["privateKey"], actual);
         }
     }
 }

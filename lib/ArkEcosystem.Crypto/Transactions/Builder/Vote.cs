@@ -34,7 +34,7 @@ namespace ArkEcosystem.Crypto.Transactions.Builder
                 Fee = Enums.TransactionFees.VOTE
             };
             transaction.Asset.Add("votes", votes);
-            transaction.RecipientId = Identity.Address.FromPassphrase(passphrase);
+            transaction.RecipientId = Identities.Address.FromPassphrase(passphrase);
 
             return Builder.Sign(transaction, passphrase, secondPassphrase);
         }

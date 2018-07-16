@@ -20,30 +20,20 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System;
+using NBitcoin;
 
-namespace ArkEcosystem.Crypto.Networks
+namespace ArkEcosystem.Crypto.Identities
 {
-    public class Mainnet : INetwork
+    public static class PublicKey
     {
-        public byte GetVersion()
+        public static PubKey FromPassphrase(string passphrase)
         {
-            return 0x17;
+            return PrivateKey.FromPassphrase(passphrase).PubKey;
         }
 
-        public DateTime GetEpoch()
+        public static PubKey FromHex(string publicKey)
         {
-            return new DateTime(2017, 3, 21, 13, 00, 0, DateTimeKind.Utc);
-        }
-
-        public string GetNethash()
-        {
-            return "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988";
-        }
-
-        public byte GetWIF()
-        {
-            return 170;
+            return new PubKey(publicKey);
         }
     }
 }

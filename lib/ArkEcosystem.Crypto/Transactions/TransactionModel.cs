@@ -61,9 +61,9 @@ namespace ArkEcosystem.Crypto.Transactions
 
         public string Sign(string passphrase)
         {
-            SenderPublicKey = Encoders.Hex.EncodeData(Identity.PublicKey.FromPassphrase(passphrase).ToBytes());
+            SenderPublicKey = Encoders.Hex.EncodeData(Identities.PublicKey.FromPassphrase(passphrase).ToBytes());
 
-            var signature = Identity.PrivateKey
+            var signature = Identities.PrivateKey
                 .FromPassphrase(passphrase)
                 .Sign(new uint256(Sha256.ComputeHash(ToBytes())));
 
@@ -72,7 +72,7 @@ namespace ArkEcosystem.Crypto.Transactions
 
         public string SecondSign(string passphrase)
         {
-            var signature = Identity.PrivateKey
+            var signature = Identities.PrivateKey
                 .FromPassphrase(passphrase)
                 .Sign(new uint256(Sha256.ComputeHash(ToBytes(true))));
 
@@ -84,7 +84,7 @@ namespace ArkEcosystem.Crypto.Transactions
             var signature = Encoders.Hex.DecodeData(Signature);
             var transactionBytes = ToBytes();
 
-            return Identity.PublicKey
+            return Identities.PublicKey
                 .FromHex(SenderPublicKey)
                 .Verify(new uint256(Sha256.ComputeHash(transactionBytes)), signature);
         }
@@ -94,7 +94,7 @@ namespace ArkEcosystem.Crypto.Transactions
             var signature = Encoders.Hex.DecodeData(SignSignature);
             var transactionBytes = ToBytes(false);
 
-            return Identity.PublicKey
+            return Identities.PublicKey
                 .FromHex(secondPublicKey)
                 .Verify(new uint256(Sha256.ComputeHash(transactionBytes)), signature);
         }

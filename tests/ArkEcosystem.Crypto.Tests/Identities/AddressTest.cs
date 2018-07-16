@@ -22,18 +22,47 @@
 // THE SOFTWARE.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArkEcosystem.Crypto.Tests.Identity
+namespace ArkEcosystem.Crypto.Tests.Identities
 {
     [TestClass]
-    public class PublicKeyTest
+    public class AddressTest
     {
         [TestMethod]
         public void Should_Get_The_Address_From_Public_Key()
         {
             var fixture = TestHelper.ReadFixture("identity");
-            var actual = Crypto.Identity.PublicKey.FromPassphrase((string)fixture["passphrase"]);
+            var publicKey = Crypto.Identities.PublicKey.FromHex((string)fixture["data"]["publicKey"]);
+            var actual = Crypto.Identities.Address.FromPublicKey(publicKey, 0x1e);
 
-            Assert.AreEqual((string)fixture["data"]["publicKey"], actual.ToHex());
+            Assert.AreEqual((string)fixture["data"]["address"], actual);
+        }
+
+        [TestMethod]
+        public void Should_Get_The_Address_From_Passphrase()
+        {
+            var fixture = TestHelper.ReadFixture("identity");
+            var actual = Crypto.Identities.Address.FromPassphrase(fixture["passphrase"], 0x1e);
+
+            Assert.AreEqual((string)fixture["data"]["address"], actual);
+        }
+
+        [TestMethod]
+        public void Should_Get_The_Address_From_Private_Key()
+        {
+            var fixture = TestHelper.ReadFixture("identity");
+            var privateKey = Crypto.Identities.PrivateKey.FromPassphrase(fixture["passphrase"]);
+            var actual = Crypto.Identities.Address.FromPrivateKey(privateKey, 0x1e);
+
+            Assert.AreEqual((string)fixture["data"]["address"], actual);
+        }
+
+        [TestMethod]
+        public void Should_Validate_The_Address()
+        {
+            var fixture = TestHelper.ReadFixture("identity");
+            var actual = Crypto.Identities.Address.Validate((string)fixture["data"]["address"], 0x1e);
+
+            Assert.IsTrue(actual);
         }
     }
 }

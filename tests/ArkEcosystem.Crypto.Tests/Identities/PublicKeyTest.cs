@@ -22,19 +22,18 @@
 // THE SOFTWARE.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ArkEcosystem.Crypto.Tests.Identity
+namespace ArkEcosystem.Crypto.Tests.Identities
 {
     [TestClass]
-    public class PrivateKeyTest
+    public class PublicKeyTest
     {
-        [Ignore]
         [TestMethod]
         public void Should_Get_The_Address_From_Public_Key()
         {
             var fixture = TestHelper.ReadFixture("identity");
-            var actual = Crypto.Identity.PrivateKey.FromPassphrase((string)fixture["passphrase"]);
+            var actual = Crypto.Identities.PublicKey.FromPassphrase((string)fixture["passphrase"]);
 
-            Assert.AreEqual(fixture["data"]["privateKey"], actual);
+            Assert.AreEqual((string)fixture["data"]["publicKey"], actual.ToHex());
         }
     }
 }

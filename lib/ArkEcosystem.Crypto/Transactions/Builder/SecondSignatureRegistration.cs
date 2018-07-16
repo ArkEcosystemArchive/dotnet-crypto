@@ -36,7 +36,7 @@ namespace ArkEcosystem.Crypto.Transactions.Builder
             };
 
             transaction.Asset.Add("signature", new Dictionary<string, string>());
-            var publicKey = Encoders.Hex.EncodeData(Identity.PublicKey.FromPassphrase(secondPassphrase).ToBytes());
+            var publicKey = Encoders.Hex.EncodeData(Identities.PublicKey.FromPassphrase(secondPassphrase).ToBytes());
             transaction.Asset["signature"].Add("publicKey", publicKey);
 
             return Builder.Sign(transaction, passphrase, secondPassphrase);

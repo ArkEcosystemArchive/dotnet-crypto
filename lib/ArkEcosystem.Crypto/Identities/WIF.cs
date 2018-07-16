@@ -20,20 +20,29 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NBitcoin.DataEncoders;
+using System.Text;
+using System.IO;
+using System.Security.Cryptography;
 
-namespace ArkEcosystem.Crypto.Tests.Identity
+namespace ArkEcosystem.Crypto.Identities
 {
-    [TestClass]
-    public class WIFTest
+    public static class WIF
     {
-        [TestMethod]
-        public void Should_Get_The_Address_From_Public_Key()
-        {
-            var fixture = TestHelper.ReadFixture("identity");
-            var actual = Crypto.Identity.WIF.FromPassphrase((string)fixture["passphrase"]);
+        static readonly SHA256 Sha256 = SHA256.Create();
 
-            Assert.AreEqual((string)fixture["data"]["wif"], actual);
+        public static string FromPassphrase(string passphrase)
+        {
+            MemoryStream stream = new MemoryStream();
+
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write(Configuration.Network.Get().GetWIF());
+                writer.Write(Sha256.ComputeHash(Encoding.ASCII.GetBytes(passphrase)));
+                writer.Write((byte)0x01);
+
+                return Encoders.Base58Check.EncodeData(stream.ToArray());
+            }
         }
     }
 }

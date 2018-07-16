@@ -25,7 +25,7 @@ using NBitcoin;
 using SshNet.Security.Cryptography;
 using System.IO;
 
-namespace ArkEcosystem.Crypto.Identity
+namespace ArkEcosystem.Crypto.Identities
 {
     public static class Address
     {
@@ -48,7 +48,7 @@ namespace ArkEcosystem.Crypto.Identity
                 {
                     writer.Write(publicKeyHash);
                 } else {
-                    writer.Write(Configuration.Network.Get().GetPublicKeyHash());
+                    writer.Write(Configuration.Network.Get().GetVersion());
                 }
 
                 writer.Write(Ripemd160.ComputeHash(bytes, 0, bytes.Length));
@@ -72,7 +72,7 @@ namespace ArkEcosystem.Crypto.Identity
             }
             else
             {
-                return addressPrefix == Configuration.Network.Get().GetPublicKeyHash();
+                return addressPrefix == Configuration.Network.Get().GetVersion();
             }
         }
     }

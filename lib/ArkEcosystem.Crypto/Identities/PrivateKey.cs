@@ -20,29 +20,21 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using NBitcoin.DataEncoders;
 using System.Text;
-using System.IO;
+using NBitcoin;
 using System.Security.Cryptography;
 
-namespace ArkEcosystem.Crypto.Identity
+namespace ArkEcosystem.Crypto.Identities
 {
-    public static class WIF
+    public static class PrivateKey
     {
         static readonly SHA256 Sha256 = SHA256.Create();
 
-        public static string FromPassphrase(string passphrase)
+        public static Key FromPassphrase(string passphrase)
         {
-            MemoryStream stream = new MemoryStream();
+            var privateKeyHash = Sha256.ComputeHash(Encoding.ASCII.GetBytes(passphrase));
 
-            using (BinaryWriter writer = new BinaryWriter(stream))
-            {
-                writer.Write(Configuration.Network.Get().GetWIF());
-                writer.Write(Sha256.ComputeHash(Encoding.ASCII.GetBytes(passphrase)));
-                writer.Write((byte)0x01);
-
-                return Encoders.Base58Check.EncodeData(stream.ToArray());
-            }
+            return new Key(privateKeyHash);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ArkEcosystem.Crypto.Networks
 {
     public class Devnet : INetwork
     {
-        public byte GetPublicKeyHash()
+        public byte GetVersion()
         {
             return 0x1e;
         }

@@ -24,7 +24,7 @@ using System;
 
 public interface INetwork
 {
-    byte GetPublicKeyHash();
+    byte GetVersion();
     DateTime GetEpoch();
     string GetNethash();
     byte GetWIF();

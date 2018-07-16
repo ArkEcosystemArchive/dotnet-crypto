@@ -48,7 +48,7 @@
 - [x] Vote
 - [ ] Multi Signature Registration
 
-### Transaction Entity
+### Transaction
 - [x] getId
 - [x] sign
 - [x] secondSign
@@ -67,21 +67,21 @@
 - [x] toDictionary
 - [x] toJson
 
-### Address Identity
+### Address
 - [x] fromPassphrase
 - [x] fromPublicKey
 - [x] fromPrivateKey
 - [x] validate
 
-### Private Key Identity
+### Private Key
 - [x] fromPassphrase
 - [x] fromHex
 
-### Public Key Identity
+### Public Key
 - [x] fromPassphrase
 - [x] fromHex
 
-### WIF Identity
+### WIF
 - [x] fromPassphrase
 
 ### Configuration

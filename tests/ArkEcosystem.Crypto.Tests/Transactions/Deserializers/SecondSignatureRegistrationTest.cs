@@ -26,7 +26,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using ArkEcosystem.Crypto.Identity;
+using ArkEcosystem.Crypto.Identities;
 
 namespace ArkEcosystem.Crypto.Tests.Transactions.Deserializers
 {

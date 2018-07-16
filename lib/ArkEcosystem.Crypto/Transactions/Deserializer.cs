@@ -121,8 +121,8 @@ namespace ArkEcosystem.Crypto.Transactions
 
             if (transaction.Type == 3)
             {
-                var publicKey = Identity.PublicKey.FromHex(transaction.SenderPublicKey);
-                transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
+                var publicKey = Identities.PublicKey.FromHex(transaction.SenderPublicKey);
+                transaction.RecipientId = Identities.Address.FromPublicKey(publicKey, transaction.Network);
             }
 
             if (transaction.Type == 4)
@@ -145,8 +145,8 @@ namespace ArkEcosystem.Crypto.Transactions
 
             if (transaction.Type == 1 || transaction.Type == 4)
             {
-                var publicKey = Identity.PublicKey.FromHex(transaction.SenderPublicKey);
-                transaction.RecipientId = Identity.Address.FromPublicKey(publicKey, transaction.Network);
+                var publicKey = Identities.PublicKey.FromHex(transaction.SenderPublicKey);
+                transaction.RecipientId = Identities.Address.FromPublicKey(publicKey, transaction.Network);
             }
 
             return transaction;
