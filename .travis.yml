@@ -1,7 +1,12 @@
 language: csharp
+
 mono: none
+
 dotnet: 2.1
+
 script:
-  # - dotnet restore
-  - dotnet build ./lib/ArkEcosystem.Crypto
-  - dotnet test ./tests/ArkEcosystem.Crypto.Tests
+  - dotnet build ./ArkEcosystem.Crypto/ArkEcosystem.Crypto
+  - dotnet test ./ArkEcosystem.Crypto/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.sln
+
+git:
+  depth: 1
