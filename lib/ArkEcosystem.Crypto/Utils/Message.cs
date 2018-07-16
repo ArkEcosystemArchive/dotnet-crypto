@@ -66,16 +66,19 @@ namespace ArkEcosystem.Crypto
             return new PubKey(publicKey).Verify(new uint256(messageBytes), messageSignature);
         }
 
-        public string ToJson()
+        public Dictionary<string, string> ToDictionary()
         {
-            var json = new Dictionary<string, string>
+            return new Dictionary<string, string>
             {
                 { "publickey", publicKey },
                 { "signature", signature },
                 { "message", message }
             };
+        }
 
-            return JObject.FromObject(json).ToString();
+        public string ToJson()
+        {
+            return JObject.FromObject(ToDictionary()).ToString();
         }
     }
 }
