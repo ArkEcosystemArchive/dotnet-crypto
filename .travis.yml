@@ -8,5 +8,8 @@ script:
   - dotnet build ./lib/ArkEcosystem.Crypto
   - dotnet test ./tests/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.csproj
 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
 git:
   depth: 1
