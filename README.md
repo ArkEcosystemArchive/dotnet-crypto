@@ -39,14 +39,14 @@
 - [x] Second Signature Registration
 - [x] Delegate Registration
 - [x] Vote
-- [ ] Multi Signature Registration
+- [x] Multi Signature Registration
 
 ### Transaction Verifying
 - [x] Transfer
 - [x] Second Signature Registration
 - [x] Delegate Registration
 - [x] Vote
-- [ ] Multi Signature Registration
+- [x] Multi Signature Registration
 
 ### Transaction
 - [x] getId
@@ -87,8 +87,8 @@
 ### Configuration
 - [x] getNetwork
 - [x] setNetwork
-- [ ] getFee
-- [ ] setFee
+- [x] getFee
+- [x] setFee
 
 ### Slot
 - [x] time

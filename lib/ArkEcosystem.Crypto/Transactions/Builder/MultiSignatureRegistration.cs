@@ -21,24 +21,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
+using System.Collections.Generic;
+using ArkEcosystem.Crypto.Configuration;
+
 namespace ArkEcosystem.Crypto.Transactions.Builder
 {
-    public static class Builder
+    public static class MultiSignatureRegistration
     {
-        public static Transaction Sign(Transaction transaction, string passphrase, string secondPassphrase = null)
+        public static Transaction Create(int min, int lifetime, List<string> keysgroup, string passphrase, string secondPassphrase)
         {
-            transaction.Timestamp = Slot.GetTime();
-
-            transaction.Signature = transaction.Sign(passphrase);
-
-            if (secondPassphrase != null)
+            var transaction = new Transaction
             {
-                transaction.SignSignature = transaction.SecondSign(secondPassphrase);
-            }
+                Type = Enums.TransactionTypes.MULTI_SIGNATURE_REGISTRATION
+            };
 
-            transaction.Id = transaction.GetId();
+            transaction.Asset.Add("multisignature", new Dictionary<string, dynamic>());
+            transaction.Asset["multisignature"].Add("min", min);
+            transaction.Asset["multisignature"].Add("lifetime", lifetime);
+            transaction.Asset["multisignature"].Add("keysgroup", keysgroup);
 
-            return transaction;
+            transaction.Fee = Convert.ToUInt64(keysgroup.Count + 1) * Fee.Get(Enums.TransactionTypes.MULTI_SIGNATURE_REGISTRATION);
+
+            return Builder.Sign(transaction, passphrase, secondPassphrase);
         }
     }
 }

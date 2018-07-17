@@ -21,19 +21,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using ArkEcosystem.Crypto.Configuration;
 using System.Collections.Generic;
 using NBitcoin.DataEncoders;
 
 namespace ArkEcosystem.Crypto.Transactions.Builder
 {
-    public class SecondSignatureRegistration
+    public static class SecondSignatureRegistration
     {
         public static Transaction Create(string passphrase, string secondPassphrase)
         {
             var transaction = new Transaction
             {
                 Type = Enums.TransactionTypes.SECOND_SIGNATURE_REGISTRATION,
-                Fee = Enums.TransactionFees.SECOND_SIGNATURE_REGISTRATION
+                Fee = Fee.Get(Enums.TransactionTypes.SECOND_SIGNATURE_REGISTRATION)
             };
 
             transaction.Asset.Add("signature", new Dictionary<string, string>());

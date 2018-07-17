@@ -21,24 +21,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace ArkEcosystem.Crypto.Transactions.Builder
+using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace ArkEcosystem.Crypto.Tests.Transactions.Builder
 {
-    public static class Builder
+    [TestClass]
+    public class MultiSignatureRegistrationTest
     {
-        public static Transaction Sign(Transaction transaction, string passphrase, string secondPassphrase = null)
+        [TestMethod]
+        public void Should_Create_Transaction_With_Secret()
         {
-            transaction.Timestamp = Slot.GetTime();
+            List<string> keysgroup = new List<string>{
+                "03a02b9d5fdd1307c2ee4652ba54d492d1fd11a7d1bb3f3a44c4a05e79f19de933",
+                "13a02b9d5fdd1307c2ee4652ba54d492d1fd11a7d1bb3f3a44c4a05e79f19de933",
+                "23a02b9d5fdd1307c2ee4652ba54d492d1fd11a7d1bb3f3a44c4a05e79f19de933"
+            };
 
-            transaction.Signature = transaction.Sign(passphrase);
+            var transaction = Crypto.Transactions.Builder.MultiSignatureRegistration.Create(
+                2,
+                255,
+                keysgroup,
+                "This is a top secret passphrase",
+                "this is a top secret second passphrase"
+            );
 
-            if (secondPassphrase != null)
-            {
-                transaction.SignSignature = transaction.SecondSign(secondPassphrase);
-            }
-
-            transaction.Id = transaction.GetId();
-
-            return transaction;
+            Assert.IsTrue(transaction.Verify());
         }
     }
 }

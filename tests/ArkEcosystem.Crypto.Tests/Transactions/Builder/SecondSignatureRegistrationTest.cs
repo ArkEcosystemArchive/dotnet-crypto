@@ -26,7 +26,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ArkEcosystem.Crypto.Tests.Transactions.Builder
 {
     [TestClass]
-    public class SecondSignatureRegistration
+    public class SecondSignatureRegistrationTest
     {
         [TestMethod]
         public void Should_Create_Transaction_With_Secret()

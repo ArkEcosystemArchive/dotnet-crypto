@@ -21,16 +21,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using ArkEcosystem.Crypto.Configuration;
+
 namespace ArkEcosystem.Crypto.Transactions.Builder
 {
-    public class Transfer
+    public static class Transfer
     {
         public static Transaction Create(string recipientId, ulong amount, string vendorField, string passphrase, string secondPassphrase = null)
         {
             var transaction = new Transaction
             {
                 Type = Enums.TransactionTypes.TRANSFER,
-                Fee = Enums.TransactionFees.TRANSFER,
+                Fee = Fee.Get(Enums.TransactionTypes.TRANSFER),
                 RecipientId = recipientId,
                 Amount = amount,
                 VendorField = vendorField

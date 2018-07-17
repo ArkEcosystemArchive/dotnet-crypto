@@ -22,17 +22,18 @@
 // THE SOFTWARE.
 
 using System.Collections.Generic;
+using ArkEcosystem.Crypto.Configuration;
 
 namespace ArkEcosystem.Crypto.Transactions.Builder
 {
-    public class DelegateRegistration
+    public static class DelegateRegistration
     {
         public static Transaction Create(string username, string passphrase, string secondPassphrase = null)
         {
             var transaction = new Transaction
             {
                 Type = Enums.TransactionTypes.DELEGATE_REGISTRATION,
-                Fee = Enums.TransactionFees.DELEGATE_REGISTRATION
+                Fee = Fee.Get(Enums.TransactionTypes.DELEGATE_REGISTRATION)
             };
             transaction.Asset.Add("delegate", new Dictionary<string, string>());
             transaction.Asset["delegate"].Add("username", username);

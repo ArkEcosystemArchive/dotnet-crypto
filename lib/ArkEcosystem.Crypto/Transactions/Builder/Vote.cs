@@ -21,18 +21,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using ArkEcosystem.Crypto.Configuration;
 using System.Collections.Generic;
 
 namespace ArkEcosystem.Crypto.Transactions.Builder
 {
-    public class Vote
+    public static class Vote
     {
         public static Transaction Create(List<string> votes, string passphrase, string secondPassphrase = null)
         {
             var transaction = new Transaction
             {
                 Type = Enums.TransactionTypes.VOTE,
-                Fee = Enums.TransactionFees.VOTE
+                Fee = Fee.Get(Enums.TransactionTypes.VOTE)
             };
             transaction.Asset.Add("votes", votes);
             transaction.RecipientId = Identities.Address.FromPassphrase(passphrase);
