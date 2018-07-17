@@ -6,8 +6,9 @@
 
 > A simple Cryptography Implementation in .NET for the Ark Blockchain.
 
-[![Build Status](https://img.shields.io/travis/ArkEcosystem/dotnet-crypto/master.svg?style=flat-square)](https://travis-ci.org/ArkEcosystem/dotnet-crypto)
-[![Latest Version](https://img.shields.io/github/release/ArkEcosystem/dotnet-crypto.svg?style=flat-square)](https://github.com/ArkEcosystem/dotnet-crypto/releases)
+[![Build Status](https://img.shields.io/travis/ArkEcosystem/dotnet-crypto/master.svg)](https://travis-ci.org/ArkEcosystem/dotnet-crypto)
+[![Codecov](https://codecov.io/gh/arkecosystem/dotnet-crypto)](https://img.shields.io/codecov/c/github/arkecosystem/dotnet-crypto.svg)
+[![Latest Version](https://img.shields.io/github/release/ArkEcosystem/dotnet-crypto.svg)](https://github.com/ArkEcosystem/dotnet-crypto/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Installation
