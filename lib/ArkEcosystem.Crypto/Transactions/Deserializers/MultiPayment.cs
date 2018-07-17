@@ -39,7 +39,7 @@ namespace ArkEcosystem.Crypto.Transactions.Deserializers
         {
             stream.Position = assetOffset / 2;
 
-            var total = reader.ReadByte() & 0xff;
+            var total = reader.ReadUInt16() & 0xff;
             var offset = assetOffset / 2 + 1;
 
             transaction.Asset.Add("payments", new List<Dictionary<string, dynamic>>());
@@ -47,9 +47,11 @@ namespace ArkEcosystem.Crypto.Transactions.Deserializers
             {
                 stream.Position += offset;
 
-                Dictionary<string, dynamic> payment = new Dictionary<string, dynamic>();
-                payment["amount"] = reader.ReadUInt64();
-                payment["recipientId"] = Encoders.Base58Check.EncodeData(reader.ReadBytes(21));
+                Dictionary<string, dynamic> payment = new Dictionary<string, dynamic>
+                {
+                    ["amount"] = reader.ReadUInt64(),
+                    ["recipientId"] = Encoders.Base58Check.EncodeData(reader.ReadBytes(21))
+                };
 
                 transaction.Asset["payments"].Add(payment);
 
