@@ -5,8 +5,8 @@ mono: none
 dotnet: 2.1
 
 script:
-  - dotnet build ./lib/ArkEcosystem.Crypto
-  - dotnet test ./tests/ArkEcosystem.Crypto.Tests/ArkEcosystem.Crypto.Tests.csproj
+  - dotnet build ./ArkEcosystem.Crypto
+  - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover ./ArkEcosystem.Crypto.Tests
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
