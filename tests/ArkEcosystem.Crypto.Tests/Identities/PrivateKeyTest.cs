@@ -28,14 +28,22 @@ namespace ArkEcosystem.Crypto.Tests.Identities
     [TestClass]
     public class PrivateKeyTest
     {
-        [Ignore]
         [TestMethod]
-        public void Should_Get_The_Address_From_Public_Key()
+        public void Should_Get_The_Private_Key_From_Passphrase()
         {
             var fixture = TestHelper.ReadFixture("identity");
             var actual = Crypto.Identities.PrivateKey.FromPassphrase((string)fixture["passphrase"]);
 
-            Assert.AreEqual(fixture["data"]["privateKey"], actual);
+            Assert.AreEqual((string)fixture["data"]["publicKey"], actual.PubKey.ToHex());
+        }
+
+        [TestMethod]
+        public void Should_Get_The_Private_Key_From_Hex()
+        {
+            var fixture = TestHelper.ReadFixture("identity");
+            var actual = Crypto.Identities.PrivateKey.FromHex((string)fixture["data"]["privateKey"]);
+
+            Assert.AreEqual((string)fixture["data"]["publicKey"], actual.PubKey.ToHex());
         }
     }
 }

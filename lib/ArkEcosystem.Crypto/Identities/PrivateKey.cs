@@ -24,6 +24,8 @@
 using System.Text;
 using NBitcoin;
 using System.Security.Cryptography;
+using System;
+using NBitcoin.DataEncoders;
 
 namespace ArkEcosystem.Crypto.Identities
 {
@@ -36,6 +38,13 @@ namespace ArkEcosystem.Crypto.Identities
             var privateKeyHash = Sha256.ComputeHash(Encoding.ASCII.GetBytes(passphrase));
 
             return new Key(privateKeyHash);
+        }
+
+        public static Key FromHex(string privateKey)
+        {
+            Byte[] byteKey = Encoders.Hex.DecodeData(privateKey);
+
+            return new Key(byteKey);
         }
     }
 }

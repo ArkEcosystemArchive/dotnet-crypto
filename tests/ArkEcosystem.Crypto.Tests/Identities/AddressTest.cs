@@ -29,20 +29,20 @@ namespace ArkEcosystem.Crypto.Tests.Identities
     public class AddressTest
     {
         [TestMethod]
-        public void Should_Get_The_Address_From_Public_Key()
+        public void Should_Get_The_Address_From_Passphrase()
         {
             var fixture = TestHelper.ReadFixture("identity");
-            var publicKey = Crypto.Identities.PublicKey.FromHex((string)fixture["data"]["publicKey"]);
-            var actual = Crypto.Identities.Address.FromPublicKey(publicKey, 0x1e);
+            var actual = Crypto.Identities.Address.FromPassphrase(fixture["passphrase"], 0x1e);
 
             Assert.AreEqual((string)fixture["data"]["address"], actual);
         }
 
         [TestMethod]
-        public void Should_Get_The_Address_From_Passphrase()
+        public void Should_Get_The_Address_From_Public_Key()
         {
             var fixture = TestHelper.ReadFixture("identity");
-            var actual = Crypto.Identities.Address.FromPassphrase(fixture["passphrase"], 0x1e);
+            var publicKey = Crypto.Identities.PublicKey.FromHex((string)fixture["data"]["publicKey"]);
+            var actual = Crypto.Identities.Address.FromPublicKey(publicKey, 0x1e);
 
             Assert.AreEqual((string)fixture["data"]["address"], actual);
         }
