@@ -37,11 +37,6 @@ namespace ArkEcosystem.Crypto.Networks
             return new DateTime(2017, 3, 21, 13, 00, 0, DateTimeKind.Utc);
         }
 
-        public string GetNethash()
-        {
-            return "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988";
-        }
-
         public byte GetWIF()
         {
             return 170;

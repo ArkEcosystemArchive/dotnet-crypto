@@ -27,6 +27,5 @@ public interface INetwork
 {
     byte GetVersion();
     DateTime GetEpoch();
-    string GetNethash();
     byte GetWIF();
 }
