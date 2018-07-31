@@ -22,31 +22,20 @@
 // THE SOFTWARE.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace ArkEcosystem.Crypto.Tests.Configuration
 {
     [TestClass]
-    public class NetworkTest
+    public class TestnetTest
     {
         [TestMethod]
-        public void Should_Get_The_Default_Network()
+        public void Should_Get_The_Mainnet_values()
         {
-            var defaultNetwork = Crypto.Configuration.Network.Get();
-            var expectedNetwork = new Crypto.Networks.Devnet();
-            Assert.AreEqual(expectedNetwork.GetEpoch(), defaultNetwork.GetEpoch());
-            Assert.AreEqual(expectedNetwork.GetVersion(), defaultNetwork.GetVersion());
-            Assert.AreEqual(expectedNetwork.GetWIF(), defaultNetwork.GetWIF());
-        }
-
-        [TestMethod]
-        public void Should_Set_The_Network()
-        {
-            var expectedNetwork = new Crypto.Networks.Mainnet();
-            Crypto.Configuration.Network.Set(new Crypto.Networks.Mainnet());
-            var actualNetwork = Crypto.Configuration.Network.Get();
-            Assert.AreEqual(expectedNetwork.GetEpoch(), actualNetwork.GetEpoch());
-            Assert.AreEqual(expectedNetwork.GetVersion(), actualNetwork.GetVersion());
-            Assert.AreEqual(expectedNetwork.GetWIF(), actualNetwork.GetWIF());
+            var devnet = new Crypto.Networks.Testnet();
+            Assert.AreEqual(new DateTime(2017, 3, 21, 13, 00, 0, DateTimeKind.Utc), devnet.GetEpoch());
+            Assert.AreEqual(0x17, devnet.GetVersion());
+            Assert.AreEqual(186, devnet.GetWIF());
         }
     }
 }
