@@ -29,9 +29,24 @@ namespace ArkEcosystem.Crypto.Tests.Configuration
     public class NetworkTest
     {
         [TestMethod]
-        public void Should_Be_True()
+        public void Should_Get_The_Default_Network()
         {
-            Assert.IsTrue(true);
+            var defaultNetwork = Crypto.Configuration.Network.Get();
+            var expectedNetwork = new Crypto.Networks.Devnet();
+            Assert.AreEqual(expectedNetwork.GetEpoch(), defaultNetwork.GetEpoch());
+            Assert.AreEqual(expectedNetwork.GetVersion(), defaultNetwork.GetVersion());
+            Assert.AreEqual(expectedNetwork.GetWIF(), defaultNetwork.GetWIF());
+        }
+
+        [TestMethod]
+        public void Should_Set_The_Network()
+        {
+            var expectedNetwork = new Crypto.Networks.Mainnet();
+            Crypto.Configuration.Network.Set(new Crypto.Networks.Mainnet());
+            var actualNetwork = Crypto.Configuration.Network.Get();
+            Assert.AreEqual(expectedNetwork.GetEpoch(), actualNetwork.GetEpoch());
+            Assert.AreEqual(expectedNetwork.GetVersion(), actualNetwork.GetVersion());
+            Assert.AreEqual(expectedNetwork.GetWIF(), actualNetwork.GetWIF());
         }
     }
 }
