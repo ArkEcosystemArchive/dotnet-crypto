@@ -25,7 +25,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NBitcoin.DataEncoders;
 using System;
 
-namespace ArkEcosystem.Crypto.Tests.Configuration
+namespace ArkEcosystem.Crypto.Tests
 {
     [TestClass]
     public class TransactionTest
