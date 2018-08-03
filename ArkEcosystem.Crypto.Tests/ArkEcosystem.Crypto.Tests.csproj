@@ -1,19 +1,165 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.props')" />
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <DebugType>Full</DebugType>
-    <IsPackable>false</IsPackable>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1DFC4267-289F-4996-9CBA-47CE3C2E3C39}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ArkEcosystem.Crypto.Tests</RootNamespace>
+    <AssemblyName>ArkEcosystem.Crypto.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" Version="2.1.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.2.1" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.2.1" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.2.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.2.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="NBitcoin, Version=4.1.1.34, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBitcoin.4.1.1.34\lib\net461\NBitcoin.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\ArkEcosystem.Crypto\ArkEcosystem.Crypto.csproj" />
+    <Compile Include="Configuration\FeeTest.cs" />
+    <Compile Include="Configuration\NetworkTest.cs" />
+    <Compile Include="Identities\AddressTest.cs" />
+    <Compile Include="Identities\PrivateKeyTest.cs" />
+    <Compile Include="Identities\PublicKeyTest.cs" />
+    <Compile Include="Identities\WIFTest.cs" />
+    <Compile Include="Networks\DevnetTest.cs" />
+    <Compile Include="Networks\MainnetTest.cs" />
+    <Compile Include="Networks\TestnetTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestHelper.cs" />
+    <Compile Include="Transactions\Builder\DelegateRegistrationTest.cs" />
+    <Compile Include="Transactions\Builder\MultiSignatureRegistrationTest.cs" />
+    <Compile Include="Transactions\Builder\SecondSignatureRegistrationTest.cs" />
+    <Compile Include="Transactions\Builder\TransferTest.cs" />
+    <Compile Include="Transactions\Builder\VoteTest.cs" />
+    <Compile Include="Transactions\Deserializers\DelegateRegistrationTest.cs" />
+    <Compile Include="Transactions\Deserializers\DelegateResignationTest.cs" />
+    <Compile Include="Transactions\Deserializers\IPFSTest.cs" />
+    <Compile Include="Transactions\Deserializers\MultiPaymentTest.cs" />
+    <Compile Include="Transactions\Deserializers\MultiSignatureRegistrationTest.cs" />
+    <Compile Include="Transactions\Deserializers\SecondSignatureRegistrationTest.cs" />
+    <Compile Include="Transactions\Deserializers\TimelockTransferTest.cs" />
+    <Compile Include="Transactions\Deserializers\TransferTest.cs" />
+    <Compile Include="Transactions\Deserializers\VoteTest.cs" />
+    <Compile Include="Transactions\Serializers\DelegateRegistrationTest.cs" />
+    <Compile Include="Transactions\Serializers\DelegateResignationTest.cs" />
+    <Compile Include="Transactions\Serializers\IPFSTest.cs" />
+    <Compile Include="Transactions\Serializers\MultiPaymentTest.cs" />
+    <Compile Include="Transactions\Serializers\MultiSignatureRegistrationTest.cs" />
+    <Compile Include="Transactions\Serializers\SecondSignatureRegistrationTest.cs" />
+    <Compile Include="Transactions\Serializers\TimelockTransferTest.cs" />
+    <Compile Include="Transactions\Serializers\TransferTest.cs" />
+    <Compile Include="Transactions\Serializers\VoteTest.cs" />
+    <Compile Include="Transactions\TransactionTest.cs" />
+    <Compile Include="Utils\MessageTest.cs" />
+    <Compile Include="Utils\SlotTest.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Fixtures\identity.json" />
+    <None Include="Fixtures\message.json" />
+    <None Include="Fixtures\Transactions\delegate_registration\passphrase.json" />
+    <None Include="Fixtures\Transactions\delegate_registration\second-passphrase.json" />
+    <None Include="Fixtures\Transactions\delegate_resignation\passphrase.json" />
+    <None Include="Fixtures\Transactions\ipfs\passphrase.json" />
+    <None Include="Fixtures\Transactions\multi_payment\passphrase.json" />
+    <None Include="Fixtures\Transactions\multi_signature_registration\passphrase.json" />
+    <None Include="Fixtures\Transactions\second_signature_registration\second-passphrase.json" />
+    <None Include="Fixtures\Transactions\timelock_transfer\passphrase.json" />
+    <None Include="Fixtures\Transactions\transfer\passphrase-with-vendor-field-hex.json" />
+    <None Include="Fixtures\Transactions\transfer\passphrase-with-vendor-field.json" />
+    <None Include="Fixtures\Transactions\transfer\passphrase.json" />
+    <None Include="Fixtures\Transactions\transfer\second-passphrase-with-vendor-field-hex.json" />
+    <None Include="Fixtures\Transactions\transfer\second-passphrase-with-vendor-field.json" />
+    <None Include="Fixtures\Transactions\transfer\second-passphrase.json" />
+    <None Include="Fixtures\Transactions\vote\passphrase.json" />
+    <None Include="Fixtures\Transactions\vote\second-passphrase.json" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArkEcosystem.Crypto\ArkEcosystem.Crypto.csproj">
+      <Project>{ec148265-b7a6-485c-8c01-9323f4432303}</Project>
+      <Name>ArkEcosystem.Crypto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.targets'))" />
+  </Target>
+  <Import Project="..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.targets')" />
 </Project>

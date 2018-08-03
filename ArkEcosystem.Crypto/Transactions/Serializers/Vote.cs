@@ -34,7 +34,7 @@ namespace ArkEcosystem.Crypto.Transactions.Serializers
 
             foreach (var vote in transaction.Asset["votes"])
             {
-                if (vote.StartsWith('+'))
+                if (vote.StartsWith("+"))
                 {
                     voteBytes += "01" + vote.Substring(1);
                 }

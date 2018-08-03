@@ -1,30 +1,102 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>ArkEcosystem.Crypto</PackageId>
-    <PackageVersion>0.1.0</PackageVersion>
-    <Authors>Brian Faust</Authors>
-    <PackageLicenseUrl>https://github.com/ArkEcosystem/dotnet-crypto/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Owners>Ark Ecosystem</Owners>
-    <PackageProjectUrl>https://github.com/ArkEcosystem/dotnet-crypto</PackageProjectUrl>
-    <Summary>A simple Cryptography Implementation in .NET for the Ark Blockchain.</Summary>
-    <Title>ArkEcosystem Crypto</Title>
-    <Description>A simple Cryptography Implementation in .NET for the Ark Blockchain.</Description>
-    <PackOnBuild>true</PackOnBuild>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EC148265-B7A6-485C-8C01-9323F4432303}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ArkEcosystem.Crypto</RootNamespace>
+    <AssemblyName>ArkEcosystem.Crypto</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugType>Full</DebugType>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="NBitcoin" Version="4.1.1.20" />
-    <PackageReference Include="SshNet.Security.Cryptography" Version="1.3.0" />
-    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
-    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
-    <PackageReference Include="System.Collections" Version="4.3.0" />
-    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
+    <Reference Include="NBitcoin, Version=4.1.1.34, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBitcoin.4.1.1.34\lib\net461\NBitcoin.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SshNet.Security.Cryptography, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SshNet.Security.Cryptography.1.3.0\lib\net45\SshNet.Security.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\Fee.cs" />
+    <Compile Include="Configuration\Network.cs" />
+    <Compile Include="Enums\TransactionFees.cs" />
+    <Compile Include="Enums\TransactionTypes.cs" />
+    <Compile Include="Identities\Address.cs" />
+    <Compile Include="Identities\PrivateKey.cs" />
+    <Compile Include="Identities\PublicKey.cs" />
+    <Compile Include="Identities\WIF.cs" />
+    <Compile Include="Interfaces\Network.cs" />
+    <Compile Include="Networks\Devnet.cs" />
+    <Compile Include="Networks\Mainnet.cs" />
+    <Compile Include="Networks\Testnet.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transactions\Builder\Builder.cs" />
+    <Compile Include="Transactions\Builder\DelegateRegistration.cs" />
+    <Compile Include="Transactions\Builder\MultiSignatureRegistration.cs" />
+    <Compile Include="Transactions\Builder\SecondSignatureRegistration.cs" />
+    <Compile Include="Transactions\Builder\Transfer.cs" />
+    <Compile Include="Transactions\Builder\Vote.cs" />
+    <Compile Include="Transactions\Deserializer.cs" />
+    <Compile Include="Transactions\Deserializers\DelegateRegistration.cs" />
+    <Compile Include="Transactions\Deserializers\DelegateResignation.cs" />
+    <Compile Include="Transactions\Deserializers\IPFS.cs" />
+    <Compile Include="Transactions\Deserializers\MultiPayment.cs" />
+    <Compile Include="Transactions\Deserializers\MultiSignatureRegistration.cs" />
+    <Compile Include="Transactions\Deserializers\SecondSignatureRegistration.cs" />
+    <Compile Include="Transactions\Deserializers\TimelockTransfer.cs" />
+    <Compile Include="Transactions\Deserializers\Transfer.cs" />
+    <Compile Include="Transactions\Deserializers\Vote.cs" />
+    <Compile Include="Transactions\Serializer.cs" />
+    <Compile Include="Transactions\Serializers\DelegateRegistration.cs" />
+    <Compile Include="Transactions\Serializers\DelegateResignation.cs" />
+    <Compile Include="Transactions\Serializers\IPFS.cs" />
+    <Compile Include="Transactions\Serializers\MultiPayment.cs" />
+    <Compile Include="Transactions\Serializers\MultiSignatureRegistration.cs" />
+    <Compile Include="Transactions\Serializers\SecondSignatureRegistration.cs" />
+    <Compile Include="Transactions\Serializers\TimelockTransfer.cs" />
+    <Compile Include="Transactions\Serializers\Transfer.cs" />
+    <Compile Include="Transactions\Serializers\Vote.cs" />
+    <Compile Include="Transactions\Transaction.cs" />
+    <Compile Include="Utils\Message.cs" />
+    <Compile Include="Utils\Slot.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
