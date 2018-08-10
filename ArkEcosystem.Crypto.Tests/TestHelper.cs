@@ -7,7 +7,7 @@ namespace ArkEcosystem.Crypto.Tests
 {
     public static class TestHelper
     {
-        const string FIXTURES_PATH = "../../../Fixtures/";
+        const string FIXTURES_PATH = "../../Fixtures/";
 
         public static Dictionary<string, dynamic> ReadTransactionFixture(string transactionType, string fixtureName)
         {
