@@ -51,6 +51,7 @@ namespace ArkEcosystem.Crypto.Tests.Transactions.Deserializers
             Assert.AreEqual((string)transaction["id"], actual.Id);
             Assert.AreEqual((byte)transaction["asset"]["multisignature"]["min"], actual.Asset["multisignature"]["min"]);
             Assert.AreEqual((byte)transaction["asset"]["multisignature"]["lifetime"], actual.Asset["multisignature"]["lifetime"]);
+            Assert.IsTrue(actual.Verify());
 
             CollectionAssert.AreEqual(transaction["asset"]["multisignature"]["keysgroup"].ToObject<List<string>>(), actual.Asset["multisignature"]["keysgroup"]);
         }

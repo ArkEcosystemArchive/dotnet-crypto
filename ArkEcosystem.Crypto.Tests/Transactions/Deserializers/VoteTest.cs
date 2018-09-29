@@ -51,6 +51,7 @@ namespace ArkEcosystem.Crypto.Tests.Transactions.Deserializers
             Assert.AreEqual((string)transaction["recipientId"], actual.RecipientId);
             Assert.AreEqual((string)transaction["signature"], actual.Signature);
             Assert.AreEqual((string)transaction["id"], actual.Id);
+            Assert.IsTrue(actual.Verify());
 
             CollectionAssert.AreEqual(actual.Asset["votes"], transaction["asset"]["votes"].ToObject<List<string>>());
         }
@@ -74,6 +75,7 @@ namespace ArkEcosystem.Crypto.Tests.Transactions.Deserializers
             Assert.AreEqual((string)transaction["signature"], actual.Signature);
             Assert.AreEqual((string)transaction["signSignature"], actual.SignSignature);
             Assert.AreEqual((string)transaction["id"], actual.Id);
+            Assert.IsTrue(actual.Verify());
 
             CollectionAssert.AreEqual(actual.Asset["votes"], transaction["asset"]["votes"].ToObject<List<string>>());
         }
