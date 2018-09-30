@@ -184,7 +184,8 @@ namespace ArkEcosystem.Crypto.Transactions
                 writer.Write(Timestamp);
                 writer.Write(Encoders.Hex.DecodeData(SenderPublicKey));
 
-                if (RecipientId != null)
+                var skipRecipientId = Type == Enums.TransactionTypes.SECOND_SIGNATURE_REGISTRATION || Type == Enums.TransactionTypes.MULTI_SIGNATURE_REGISTRATION;
+                if (RecipientId != null && !skipRecipientId)
                 {
                     writer.Write(Encoders.Base58Check.DecodeData(RecipientId));
                 }

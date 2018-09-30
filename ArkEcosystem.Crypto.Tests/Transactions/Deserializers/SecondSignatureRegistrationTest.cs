@@ -51,6 +51,7 @@ namespace ArkEcosystem.Crypto.Tests.Transactions.Deserializers
             Assert.AreEqual((string)transaction["signature"], actual.Signature);
             Assert.AreEqual((string)transaction["id"], actual.Id);
             Assert.AreEqual((string)transaction["asset"]["signature"]["publicKey"], actual.Asset["signature"]["publicKey"]);
+            Assert.IsTrue(actual.Verify());
 
             // special case as the type 1 transaction itself has no recipientId
             Assert.AreEqual(Address.FromPublicKey(PublicKey.FromHex(actual.SenderPublicKey)), actual.RecipientId);
