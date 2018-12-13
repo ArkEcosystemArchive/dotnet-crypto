@@ -76,7 +76,7 @@ namespace ArkEcosystem.Crypto.Transactions
         {
             var signature = Identities.PrivateKey
                 .FromPassphrase(passphrase)
-                .Sign(new uint256(Sha256.ComputeHash(ToBytes(true))));
+                .Sign(new uint256(Sha256.ComputeHash(ToBytes(false))));
 
             return Encoders.Hex.EncodeData(signature.ToDER());
         }
