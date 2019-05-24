@@ -198,10 +198,13 @@ namespace ArkEcosystem.Crypto.Transactions
                 {
                     var vendorFieldBytes = Encoding.ASCII.GetBytes(VendorField);
 
-                    if (vendorFieldBytes.Length < 65)
+                    if (vendorFieldBytes.Length <= 255)
                     {
                         writer.Write(vendorFieldBytes);
-                        writer.Write(new byte[64 - vendorFieldBytes.Length]);
+                        if (vendorFieldBytes.Length < 64)
+                        {
+                            writer.Write(new byte[64 - vendorFieldBytes.Length]);
+                        }   
                     }
                 }
                 else
